@@ -15,7 +15,7 @@ export default function SignOut() {
     }
 
     return (
-        <button className="p-2 transition rounded-md flex items-center font-semibold text-red-600 hover:bg-[#333] hover:text-red-500" onClick={handleSignOut}>
+        <button className="p-2 transition rounded-md flex items-center font-semibold text-red-600 hover:text-red-500" onClick={handleSignOut}>
             <VscSignOut style={{
                 marginRight: "0.75rem",
                 fontSize: '20px'

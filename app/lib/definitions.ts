@@ -20,6 +20,7 @@
     descripcion_tarea: string;
     fecha_inicio: Date;
     fecha_finalizacion: Date;
+    nombre_curso: string;
   };
   
 
