@@ -47,7 +47,7 @@ export default function SideNavDashBoard({
                     fontSize: "20px",
                     }}
                 />{" "}
-                Tareas
+                Tareas Pendientes
             </Link>
             <Link
             href="/dashboard/dashboard-home-estudiante/code-review"

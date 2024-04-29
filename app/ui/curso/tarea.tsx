@@ -1,4 +1,3 @@
-import { IoWarningOutline } from "react-icons/io5";
 import { MdOutlineWorkOutline } from "react-icons/md";
 
 export default function TareasDelCurso({ nombre, profesor, fechaInicio } : { nombre: string, profesor: string, fechaInicio: string}) {

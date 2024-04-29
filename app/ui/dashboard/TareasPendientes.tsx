@@ -1,4 +1,5 @@
 import { TypeTareasPendientes } from "@/app/dashboard/dashboard-home-estudiante/curso/page";
+import Link from "next/link";
 import { IoAlertCircleOutline } from "react-icons/io5";
 
 export default function TareasPendientes({ tareasPendientes } : { tareasPendientes: TypeTareasPendientes[] | undefined}) {
@@ -8,7 +9,7 @@ export default function TareasPendientes({ tareasPendientes } : { tareasPendient
         <h1 className="flex items-center font-semibold text-[20px]"><IoAlertCircleOutline style={{ marginRight: "10px", fontSize: "25px", color: "rgb(37 99 235)" }} />¡Tienes tareas pendientes!</h1>
                 {
                     tareasPendientes?.map(tarea => (
-                        <div key={tarea.id} className="my-5 transition cursor-pointer w-full h-26 border-[1px] border-white text-white p-4 rounded-lg font-semibold flex flex-col">
+                        <Link href={`/dashboard/dashboard-home-estudiante/tareas-estudiante?id=${tarea.id}`} key={tarea.id} className="my-5 transition cursor-pointer w-full h-26 border-[1px] border-white text-white p-4 rounded-lg font-semibold flex flex-col">
                             <div className="flex items-center justify-between">
                                 <div>
                                     <h3>{tarea.descripcion_tarea}</h3>
@@ -21,7 +22,7 @@ export default function TareasPendientes({ tareasPendientes } : { tareasPendient
                                     Entregar
                                 </button>
                             </div>
-                        </div>
+                        </Link>
                     ))
                 }
         </div>
