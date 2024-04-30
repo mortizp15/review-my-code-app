@@ -1,14 +1,17 @@
 import { getTareaById, getUsuarioId } from "@/app/lib/actions";
 import EnviarTarea from "@/app/ui/tarea/enviar-tarea";
-import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
+import { Session, createServerActionClient, createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 export default async function TareasEstudiante({
     searchParams,
   }: {
     searchParams: { id: string };
   }) {
+
+    const supabase = createServerComponentClient({ cookies })
+    const { data: { session } } = await supabase.auth.getSession()
 
     const { id } = searchParams;
 
@@ -21,34 +24,27 @@ export default async function TareasEstudiante({
     
         const supabase = createServerActionClient({ cookies });
     
-        const extension = formData.get("archivo")?.toString().split(".").pop();
-    
         const objetoAInsertar: {
           id_tarea: string;
           id_estudiante: string;
           fecha_hora_envio: string;
-          archivo_zip_github?: File;
-          archivo_de_codigo_individual?: File;
+          nombre_repo: string;
         } = {
           id_tarea: formData.get("idTarea") as string,
           id_estudiante: formData.get("idEstudiante") as string,
           fecha_hora_envio: new Date().toISOString(),
+          nombre_repo: formData.get("nombre_repo") as string,
         };
     
-        if (extension === "zip") {
-          objetoAInsertar["archivo_zip_github"] = formData.get("archivo") as File;
-        } else {
-          objetoAInsertar["archivo_de_codigo_individual"] = formData.get(
-            "archivo"
-          ) as File;
-        }
     
         await supabase
           .from("envio_de_tarea")
           .insert([objetoAInsertar])
           .select();
     
+          revalidatePath("/dashboard/dashboard-home-estudiante/curso")
       };
+
 
     return (
        <section className="w-[90%]">
@@ -66,7 +62,7 @@ export default async function TareasEstudiante({
                 ))
                 
             }
-            <EnviarTarea addTarea={addTarea} idTarea={id} idEstudiante={idEstudiante as unknown as string}/>
+            <EnviarTarea session={session as unknown as Session} addTarea={addTarea} idTarea={id} idEstudiante={idEstudiante as unknown as string}/>
        </section>
     )
 

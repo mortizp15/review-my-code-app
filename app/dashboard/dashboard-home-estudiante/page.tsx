@@ -1,7 +1,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import MenuHome from "@/app/ui/dashboard/MenuHome";
+import BienvenidaHome from "@/app/ui/dashboard/BienvenidaHome";
 
 export default async function DashboardHomeEstudiante() {
   const supabase = createServerComponentClient({ cookies });
@@ -35,7 +35,7 @@ export default async function DashboardHomeEstudiante() {
   // La lista que se recorre en el componente SideNavDashBoard es de cursos, se castea a Curso[] para "borrar" el tipo original
   return (
     <section className="flex flex-col w-[90%]">    
-        <MenuHome />
+        <BienvenidaHome session={session}/>
     </section>
   );
 }

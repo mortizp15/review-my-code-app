@@ -31,6 +31,8 @@ export default async function DashboardHomeProfesor() {
     }
 
     return (
-        <h1 className="text-white">Dashboard profesor</h1>
+      <section className="flex flex-col w-[90%]">    
+        
+      </section>
     )
 }

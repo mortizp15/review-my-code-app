@@ -37,13 +37,7 @@ export default function InfoCurso({ id, tareas_pendientes, curso, profesor, tare
           <Link href={`/dashboard/dashboard-home-estudiante/tareas-estudiante?id=${tarea.id}`} ><TareasDelCurso key={tarea.id} nombre={tarea.descripcion_tarea} profesor={profesor} fechaInicio={new Date(tarea.fecha_inicio).toLocaleDateString()} /></Link>
         ))
       }
-      {
-        id === idCursoDeTareaPendiente  ? (
-            <TareasPendientes tareasPendientes={tareas_pendientes as unknown as TypeTareasPendientes[]}/>
-        ) : (
-            <h1 className="flex mt-14 items-center font-semibold text-[20px]">¡No tienes tareas pendientes!</h1>
-        )
-      }
+      <TareasPendientes tareasPendientes={tareas_pendientes as unknown as TypeTareasPendientes[]}/>
       
     </div>
   );

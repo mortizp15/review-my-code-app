@@ -1,27 +1,56 @@
 "use client"
 
-import { useState } from "react";
+import { getRepos } from "@/app/lib/services";
+import { Session } from "@supabase/supabase-js";
+import { useEffect, useState } from "react";
 
 
 
 export default function EnviarTarea({
+  session,
   addTarea,
   idTarea,
   idEstudiante,
 }: {
+  session: Session;
   addTarea: (formData: FormData) => void;  
   idTarea: string;
   idEstudiante: string;
 }) {
 
     const [enviado, setEnviado] = useState(false);
+    const [repos, setRepos] = useState([]);
+    const [nombre_repo, setNombreRepo] = useState("");
+
+    useEffect(() => {
+      getRepos(session.user?.user_metadata.user_name)
+        .then((data) => {
+          setRepos(data);
+        })
+        .catch((error) => {
+          console.error("Error al obtener los repositorios", error);
+        });
+
+    }, [session.user?.user_metadata.user_name])
   
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        addTarea(new FormData(event.currentTarget));
+
+        const formData = new FormData();
+        formData.append("idTarea", idTarea);
+        formData.append("idEstudiante", idEstudiante);
+        formData.append("nombre_repo", nombre_repo);
+
+        addTarea(formData);
         setEnviado(true);
     };
 
+    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setNombreRepo(event.target.value);
+    }
+
+
+    
   return (
     <div className="w-[70%] mx-auto h-[30%] mt-20">
     { !enviado ? (
@@ -34,30 +63,20 @@ export default function EnviarTarea({
             onSubmit={handleSubmit}
             className="max-w-sm mx-auto flex flex-col items-center"
             >
-            <input type="hidden" name="idTarea" id="idTarea" value={idTarea} />
-            <input
-            type="hidden"
-            name="idEstudiante"
-            id="idEstudiante"
-            value={idEstudiante}
-            />
-            <input
-            required
-            type="file"
-            name="archivo"
-            id="archivo"
-            className="block w-full border cursor-pointer border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-white dark:text-neutral-400
-                                file:bg-gray-50 file:border-0
-                                file:me-4
-                                file:py-3 file:px-4
-                                dark:file:bg-white dark:file:text-black dark:file:font-semibold"
-            />
-            <button
-            className="text-white bg-blue-500 transition py-2 px-6 rounded-md hover:bg-blue-600 mt-7"
-            type="submit"
-            >
-            Enviar
-            </button>
+              <select onChange={handleChange} id="nombre_repo" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected>Escoge un repositorio</option>
+                {
+                  repos.map((repo: { id: string; name: string }) => (
+                    <option id="nombre_repo" key={repo.id} value={repo.name}>{repo.name}</option>
+                  ))
+                }
+              </select>
+              <button
+              className="text-white bg-blue-500 transition py-2 px-6 rounded-md hover:bg-blue-600 mt-7"
+              type="submit"
+              >
+              Enviar
+              </button>
             </form>
         </>
     ) : (

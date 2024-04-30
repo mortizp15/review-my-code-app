@@ -28,7 +28,7 @@ export async function getUsuarioById(id: string) {
 
   let { data: usuario } = await supabase
     .from("usuario")
-    .select("username")
+    .select("*")
     .eq("id", id);
 
   return usuario;
@@ -89,3 +89,14 @@ export async function getTareaById(idTarea: string) {
   return tarea;
 }
 
+// Obtiene los cursos de un profesor
+export async function getCursosDeProfesor() { 
+  const supabase = createServerComponentClient({ cookies });
+  const idProfesor = await getUsuarioId();
+  let { data: cursos } = await supabase
+    .from("curso")
+    .select("*")
+    .eq("id_profesor_creador", idProfesor);
+
+  return cursos;
+}
