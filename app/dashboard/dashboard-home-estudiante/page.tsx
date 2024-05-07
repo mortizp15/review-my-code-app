@@ -1,7 +1,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import BienvenidaHome from "@/app/ui/dashboard/BienvenidaHome";
+import BienvenidaHome from "@/app/ui/dashboard/bienvenida-home";
 
 export default async function DashboardHomeEstudiante() {
   const supabase = createServerComponentClient({ cookies });

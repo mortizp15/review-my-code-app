@@ -1,8 +1,9 @@
 
   export type Usuario = {
     id: number;
-    nombre_de_usuario: string;
+    username: string;
     correo_electronico: string;
+    avatar_url?: string;
     rol: 'admin' | 'estudiante' | 'profesor';
   };
   

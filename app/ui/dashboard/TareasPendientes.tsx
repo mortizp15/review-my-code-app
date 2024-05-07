@@ -6,7 +6,13 @@ export default function TareasPendientes({ tareasPendientes } : { tareasPendient
 
     return (
         <div className="flex flex-col py-14 w-full h-[20em]">
-        <h1 className="flex items-center font-semibold text-[20px]"><IoAlertCircleOutline style={{ marginRight: "10px", fontSize: "25px", color: "rgb(37 99 235)" }} />¡Tienes tareas pendientes!</h1>
+        {
+            tareasPendientes?.length !== 0 ? (
+            <h1 className="flex items-center font-semibold text-[20px]"><IoAlertCircleOutline style={{ marginRight: "10px", fontSize: "25px", color: "rgb(37 99 235)" }} />¡Tienes tareas pendientes!</h1>
+            ) : (
+                <h1 className="font-semibold text-[20px]">¡No tienes tareas pendientes!</h1>
+            )
+        }
                 {
                     tareasPendientes?.map(tarea => (
                         <Link href={`/dashboard/dashboard-home-estudiante/tareas-estudiante?id=${tarea.id}`} key={tarea.id} className="my-5 transition cursor-pointer w-full h-26 border-[1px] border-white text-white p-4 rounded-lg font-semibold flex flex-col">

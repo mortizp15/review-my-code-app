@@ -10,9 +10,11 @@
     "gen-tipos": "npx supabase gen types typescript --project-id qstluzefyouodqoipfdx > ./app/lib/types.ts"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.6.0",
+    "@nextui-org/modal": "^2.0.33",
+    "@nextui-org/react": "^2.3.6",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/supabase-js": "^2.42.7",
-    "@vercel/postgres": "^0.8.0",
     "animate.css": "^4.1.1",
     "motion": "^10.17.0",
     "next": "14.2.2",

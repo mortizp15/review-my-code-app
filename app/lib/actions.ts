@@ -51,7 +51,7 @@ export async function getTareasPendientes() {
   const supabase = createServerComponentClient({ cookies });
   let { data: tareasPendientes } = await supabase
     .from("vista_tareas_pendientes")
-    .select("*")
+    .select("*");
 
   return tareasPendientes;
 }
@@ -64,7 +64,19 @@ export async function getTareaByCurso(idCurso: string) {
     .select("*")
     .eq("id_curso", idCurso);
 
-  return tareas
+  return tareas;
+}
+
+// Obtiene las tareas creadas por un profesor
+export async function getTareasByProfesor() {
+  const supabase = createServerComponentClient({ cookies });
+  const idProfesor = await getUsuarioId();
+  let { data: tareas } = await supabase
+    .from("tarea")
+    .select("*")
+    .eq("id_profesor", idProfesor);
+
+  return tareas;
 }
 
 // Obtiene la info del curso por su ID
@@ -90,7 +102,7 @@ export async function getTareaById(idTarea: string) {
 }
 
 // Obtiene los cursos de un profesor
-export async function getCursosDeProfesor() { 
+export async function getCursosDeProfesor() {
   const supabase = createServerComponentClient({ cookies });
   const idProfesor = await getUsuarioId();
   let { data: cursos } = await supabase
@@ -99,4 +111,115 @@ export async function getCursosDeProfesor() {
     .eq("id_profesor_creador", idProfesor);
 
   return cursos;
+}
+
+// Obtener todos los estudiantes
+export async function getEstudiantes() {
+  const supabase = createServerComponentClient({ cookies });
+  let { data: estudiantes } = await supabase
+    .from("usuario")
+    .select("*")
+    .eq("rol", "estudiante");
+
+  return estudiantes;
+}
+
+// Obtiene la tarea enviada por un estudiante
+export async function getTareasEnviadas(idTarea: string) {
+  const supabase = createServerComponentClient({ cookies });
+  const idEstudiante = await getUsuarioId();
+  let { data: tareasEnviadas } = await supabase
+    .from("envio_de_tarea")
+    .select("*")
+    .eq("id_estudiante", idEstudiante)
+    .eq("id_tarea", idTarea);
+
+  return tareasEnviadas;
+}
+
+// Obtiene el id del envio de una tarea
+export async function getIdTareaEnviada(idEstudiante: string, idTarea: string) {
+  const supabase = createServerComponentClient({ cookies });
+  let { data: tareasEnviadas } = await supabase
+    .from("envio_de_tarea")
+    .select("id")
+    .eq("id_estudiante", idEstudiante)
+    .eq("id_tarea", idTarea);
+
+  return tareasEnviadas;
+}
+
+
+// Obtiene una lista de los estudiante pertenecientes a una tarea
+export async function getEstudiantesPorTarea(idTarea: string) {
+  const supabase = createServerComponentClient({ cookies });
+  let { data: curso } = await supabase
+    .from("tarea")
+    .select("id_curso")
+    .eq("id", idTarea);
+
+  if (curso && curso?.length !== 0) {
+    let { data: estudiantes } = await supabase
+      .from("estudiante_curso")
+      .select("*")
+      .eq("id_curso", curso[0].id_curso);
+
+    if (estudiantes && estudiantes?.length !== 0) {
+      let { data: estudiantesInfo } = await supabase
+        .from("usuario")
+        .select("*")
+        .in(
+          "id",
+          estudiantes.map((estudiante) => estudiante.id_estudiante)
+        );
+
+      return estudiantesInfo;
+    }
+  }
+}
+
+// Obtiene el nombre del repo y su dueño
+export async function getRepoInfo(idTarea: string) {
+  const supabase = createServerComponentClient({ cookies });
+  const objetoRetorno = {
+    owner: "",
+    nombreRepo: "",
+  }
+  let { data: tarea } = await supabase
+    .from("envio_de_tarea")
+    .select("id_estudiante, nombre_repo")
+    .eq("id_tarea", idTarea);
+  
+
+  if (tarea && tarea?.length !== 0) {
+    objetoRetorno.nombreRepo = tarea[0].nombre_repo;
+    const estudiante = await getUsuarioById(tarea[0].id_estudiante);
+    if(estudiante) objetoRetorno.owner = estudiante[0].username;
+  }
+
+  return objetoRetorno
+}
+
+
+// Obtiene los comentarios de un envio de tarea
+export async function getComentariosDeEnvio() {
+  const supabase = createServerComponentClient({ cookies });
+  const idEstudiante = await getUsuarioId()
+  let { data: comentarios } = await supabase
+    .from("comentario_de_code_review")
+    .select("id_envio_tarea, texto_comentario, linea_codigo_comentada, archivo")
+    .eq("id_usuario_estudiante", idEstudiante);
+
+  return comentarios;
+}
+
+// Obtener el envio de una tarea por su ID
+export async function getEnvioTareaById(idEnvio: string) {
+  const supabase = createServerComponentClient({ cookies });
+  let { data: envio } = await supabase
+    .from("envio_de_tarea")
+    .select("id_tarea")
+    .eq("id", idEnvio);
+
+  return envio;
 }

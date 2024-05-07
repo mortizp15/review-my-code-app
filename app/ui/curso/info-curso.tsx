@@ -19,7 +19,7 @@ export default function InfoCurso({ id, tareas_pendientes, curso, profesor, tare
       {curso.map((curso) => (
         <>
           <p className="text-[#a0a0a0]">{profesor}</p>
-          <h1 key={curso.id} className="font-bold text-[40px] tracking-wider">
+          <h1 key={id} className="font-bold text-[40px] tracking-wider">
             {curso.nombre_curso.toUpperCase()}
           </h1>
           <hr className="mt-2 border-0 bg-blue-400 h-[2px]" />

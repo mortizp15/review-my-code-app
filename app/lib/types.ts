@@ -6,6 +6,14 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
+export type EstudianteSearch = {
+  id: string,
+  avatar_url: string | null,
+  nombre: string,
+  username: string
+}
+
+
 export type Database = {
   public: {
     Tables: {

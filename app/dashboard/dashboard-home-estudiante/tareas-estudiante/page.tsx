@@ -1,4 +1,5 @@
-import { getTareaById, getUsuarioId } from "@/app/lib/actions";
+import { getTareaById, getTareasEnviadas, getUsuarioId } from "@/app/lib/actions";
+import { EnvioDeTarea } from "@/app/lib/definitions";
 import EnviarTarea from "@/app/ui/tarea/enviar-tarea";
 import { Session, createServerActionClient, createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
@@ -16,7 +17,7 @@ export default async function TareasEstudiante({
     const { id } = searchParams;
 
     const idEstudiante = await getUsuarioId()
-
+    const tarea_enviada = await getTareasEnviadas(id)
     const tarea = await getTareaById(id)
 
     const addTarea = async (formData: FormData) => {
@@ -62,7 +63,7 @@ export default async function TareasEstudiante({
                 ))
                 
             }
-            <EnviarTarea session={session as unknown as Session} addTarea={addTarea} idTarea={id} idEstudiante={idEstudiante as unknown as string}/>
+            <EnviarTarea tarea_enviada={tarea_enviada as unknown as EnvioDeTarea[]} session={session as unknown as Session} addTarea={addTarea} idTarea={id} idEstudiante={idEstudiante as unknown as string}/>
        </section>
     )
 

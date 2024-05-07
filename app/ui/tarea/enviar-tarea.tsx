@@ -1,5 +1,6 @@
 "use client"
 
+import { EnvioDeTarea } from "@/app/lib/definitions";
 import { getRepos } from "@/app/lib/services";
 import { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
@@ -7,11 +8,13 @@ import { useEffect, useState } from "react";
 
 
 export default function EnviarTarea({
+  tarea_enviada,
   session,
   addTarea,
   idTarea,
   idEstudiante,
 }: {
+  tarea_enviada: EnvioDeTarea[];
   session: Session;
   addTarea: (formData: FormData) => void;  
   idTarea: string;
@@ -22,6 +25,7 @@ export default function EnviarTarea({
     const [repos, setRepos] = useState([]);
     const [nombre_repo, setNombreRepo] = useState("");
 
+    // Obtener repositorios del usuario
     useEffect(() => {
       getRepos(session.user?.user_metadata.user_name)
         .then((data) => {
@@ -53,7 +57,7 @@ export default function EnviarTarea({
     
   return (
     <div className="w-[70%] mx-auto h-[30%] mt-20">
-    { !enviado ? (
+    { !enviado && tarea_enviada.length === 0 ? (
         <>
             <h1 className="text-white text-center mb-5 font-semibold text-[25px]">
             ¡Envia tu tarea!

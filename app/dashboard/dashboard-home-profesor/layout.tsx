@@ -1,4 +1,3 @@
-import SideNavDashBoard from "@/app/ui/dashboard/sidenav-dashboard";
 import SidenavDashboardProfesor from "@/app/ui/dashboard/sidenav-dashboard-profesor";
 
 export default function PageProfesor({ children } : {

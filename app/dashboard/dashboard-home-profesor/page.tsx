@@ -1,6 +1,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
+import BienvenidaHome from "@/app/ui/dashboard/bienvenida-home";
 
 export default async function DashboardHomeProfesor() {
 
@@ -32,7 +33,7 @@ export default async function DashboardHomeProfesor() {
 
     return (
       <section className="flex flex-col w-[90%]">    
-        
+        <BienvenidaHome session={session} />
       </section>
     )
 }

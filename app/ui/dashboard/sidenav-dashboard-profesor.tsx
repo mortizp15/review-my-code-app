@@ -1,11 +1,21 @@
+"use client"
+
 import Link from "next/link";
 import SignOut from "./signout";
 import { ICON } from "@/app/layout";
 import { GoHome } from "react-icons/go";
 import { MdOutlineClass } from "react-icons/md";
 import { PiChalkboardTeacher } from "react-icons/pi";
+import { useState } from "react";
 
 export default function SidenavDashboardProfesor() {
+
+    const [activo, setActivo] = useState("")
+
+    const handleClick = (ruta: string) => {
+        setActivo(ruta)
+    }
+
     return (
     <div className="bg-[#19181D] flex flex-col justify-between items-center left-0 w-[20rem] border-r-2 border-r-[#333] h-full p-10 ">
       <div className="flex flex-col mt-5 h-[80%] overflow-auto">
@@ -18,8 +28,9 @@ export default function SidenavDashboardProfesor() {
         <h1 className="text-white font-bold text-[20px] mb-3">Menu</h1>
         <hr />
             <Link
+            onClick={() => handleClick("/dashboard/dashboard-home-profesor")}
             href="/dashboard/dashboard-home-profesor"
-            className="my-2 transition cursor-pointer w-full h-10 text-white p-4 rounded-lg hover:bg-[#58585873] font-semibold flex items-center"
+            className={`my-2 transition cursor-pointer w-full h-10 text-white p-4 rounded-lg ${ activo === "/dashboard/dashboard-home-profesor" ? "bg-[#58585873]" : "bg-transparent" }  hover:bg-[#58585873] font-semibold flex items-center`}
             >
                 <GoHome
                     style={{
@@ -30,8 +41,9 @@ export default function SidenavDashboardProfesor() {
                 Inicio
             </Link>
             <Link
+            onClick={() => handleClick("/dashboard/dashboard-home-profesor/cursos")}
             href="/dashboard/dashboard-home-profesor/cursos"
-            className="my-2 transition cursor-pointer w-full h-10 text-white p-4 rounded-lg hover:bg-[#58585873] font-semibold flex items-center"
+            className={`my-2 transition cursor-pointer w-full h-10 text-white p-4 rounded-lg ${ activo === "/dashboard/dashboard-home-profesor/cursos" ? "bg-[#58585873]" : "bg-transparent" }  hover:bg-[#58585873] font-semibold flex items-center`}
             >
                 <MdOutlineClass
                     style={{
@@ -42,8 +54,9 @@ export default function SidenavDashboardProfesor() {
                 Cursos
             </Link>
             <Link
-            href="/dashboard/dashboard-home-estudiante/code-review"
-            className="my-2 transition cursor-pointer w-full h-10 text-white p-4 rounded-lg hover:bg-[#58585873] font-semibold flex items-center"
+            onClick={() => handleClick("/dashboard/dashboard-home-profesor/tareas-creadas")}
+            href="/dashboard/dashboard-home-profesor/tareas-creadas"
+            className={`my-2 transition cursor-pointer w-full h-10 text-white p-4 rounded-lg ${ activo === "/dashboard/dashboard-home-profesor/tareas-creadas" ? "bg-[#58585873]" : "bg-transparent" }  hover:bg-[#58585873] font-semibold flex items-center`}
             >
                 <PiChalkboardTeacher
                     style={{
@@ -51,7 +64,7 @@ export default function SidenavDashboardProfesor() {
                     fontSize: "20px",
                     }}
                 />{" "}
-                Tareas Mandadas
+                Tareas Creadas
             </Link>
       </div>
       <SignOut />
