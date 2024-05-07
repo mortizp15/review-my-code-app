@@ -14,7 +14,7 @@ export default function SideNav() {
                     opciones.map(opcion => {
                         const OPTION_ICON = opcion.icono
                         return (
-                            <Link className="my-1 transition p-2 rounded-md hover:bg-[#333] font-semibold flex items-center" href={opcion.href}><OPTION_ICON className="mr-3 text-xl"/>{opcion.nombre}</Link>
+                            <Link key={opcion.href} className="my-1 transition p-2 rounded-md hover:bg-[#333] font-semibold flex items-center" href={opcion.href}><OPTION_ICON className="mr-3 text-xl"/>{opcion.nombre}</Link>
                         )
                     })
                 }

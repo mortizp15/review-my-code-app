@@ -17,7 +17,7 @@ export default async function CorreccionesPage() {
                             {
                                 comentarios.map((comentario) => (
                                     
-                                        <div className="border-[1px] border-[#5f5f5f81] transition hover:bg-[#234] h-fit w-full p-5 rounded-md mt-5 flex items-center">
+                                        <div key={comentario.id_envio_tarea} className="border-[1px] border-[#5f5f5f81] transition hover:bg-[#234] h-fit w-full p-5 rounded-md mt-5 flex items-center">
                                             <div className="rounded-full flex items-center justify-center p-3 bg-blue-600">
                                                 <PiChalkboardTeacher style={{
                                                     fontSize: "20px",

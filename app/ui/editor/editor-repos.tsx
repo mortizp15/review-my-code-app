@@ -53,13 +53,6 @@ export default function EditorRepos({
     }, 4000);
   };
 
-  // Limpiar el timeout
-  useEffect(() => {
-    return () => {
-      clearTimeout(idTimeout);
-    };
-  }, [])
-
   function b64DecodeUnicode(str: string) {
     // Decodifica primero a bytes escapados y luego decodifica el escape con decodeURIComponent
     return decodeURIComponent(

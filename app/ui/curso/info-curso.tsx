@@ -34,7 +34,7 @@ export default function InfoCurso({ id, tareas_pendientes, curso, profesor, tare
       
       {
         tareas.map((tarea) => (
-          <Link href={`/dashboard/dashboard-home-estudiante/tareas-estudiante?id=${tarea.id}`} ><TareasDelCurso key={tarea.id} nombre={tarea.descripcion_tarea} profesor={profesor} fechaInicio={new Date(tarea.fecha_inicio).toLocaleDateString()} /></Link>
+          <Link key={tarea.id} href={`/dashboard/dashboard-home-estudiante/tareas-estudiante?id=${tarea.id}`} ><TareasDelCurso nombre={tarea.descripcion_tarea} profesor={profesor} fechaInicio={new Date(tarea.fecha_inicio).toLocaleDateString()} /></Link>
         ))
       }
       <TareasPendientes tareasPendientes={tareas_pendientes as unknown as TypeTareasPendientes[]}/>
