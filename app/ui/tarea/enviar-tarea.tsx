@@ -1,6 +1,6 @@
 "use client"
 
-import { EnvioDeTarea } from "@/app/lib/definitions";
+import { EnvioDeTarea, Tarea } from "@/app/lib/definitions";
 import { getRepos } from "@/app/lib/services";
 import { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
@@ -10,18 +10,21 @@ import { useEffect, useState } from "react";
 export default function EnviarTarea({
   tarea_enviada,
   session,
+  tarea,
   addTarea,
   idTarea,
   idEstudiante,
 }: {
   tarea_enviada: EnvioDeTarea[];
   session: Session;
+  tarea: Tarea[];
   addTarea: (formData: FormData) => void;  
   idTarea: string;
   idEstudiante: string;
 }) {
 
     const [enviado, setEnviado] = useState(false);
+    const [fechaLimite, setFechaLimite] = useState("");
     const [repos, setRepos] = useState([]);
     const [nombre_repo, setNombreRepo] = useState("");
 
@@ -45,7 +48,18 @@ export default function EnviarTarea({
         formData.append("idEstudiante", idEstudiante);
         formData.append("nombre_repo", nombre_repo);
 
-        addTarea(formData);
+        tarea?.map(item => {
+
+          const fechaFinalizacion = new Date(item.fecha_finalizacion).getTime();
+          const fechaActual = new Date().getTime();
+
+          if(fechaActual > fechaFinalizacion){
+            setFechaLimite("¡La fecha límite de entrega ha expirado!");
+          } else {
+            addTarea(formData);
+          }
+        })   
+  
         setEnviado(true);
     };
 
@@ -57,7 +71,7 @@ export default function EnviarTarea({
     
   return (
     <div className="w-[70%] mx-auto h-[30%] mt-20">
-    { !enviado && tarea_enviada.length === 0 ? (
+    { !enviado && tarea_enviada.length === 0 && fechaLimite === "" ? (
         <>
             <h1 className="text-white text-center mb-5 font-semibold text-[25px]">
             ¡Envia tu tarea!
@@ -83,9 +97,13 @@ export default function EnviarTarea({
               </button>
             </form>
         </>
+    ) : fechaLimite !== "" ? (
+        <h1 className="text-red-600 text-center mb-5 font-semibold text-[25px]">
+            {fechaLimite}
+        </h1>
     ) : (
         <h1 className="text-white text-center mb-5 font-semibold text-[25px]">
-            ¡Tarea Enviada!
+          ¡Tarea Enviada!
         </h1>
     )}
      

@@ -1,5 +1,5 @@
 import { getTareaById, getTareasEnviadas, getUsuarioId } from "@/app/lib/actions";
-import { EnvioDeTarea } from "@/app/lib/definitions";
+import { EnvioDeTarea, Tarea } from "@/app/lib/definitions";
 import EnviarTarea from "@/app/ui/tarea/enviar-tarea";
 import { Session, createServerActionClient, createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
@@ -38,6 +38,7 @@ export default async function TareasEstudiante({
         };
     
     
+             
         await supabase
           .from("envio_de_tarea")
           .insert([objetoAInsertar])
@@ -63,7 +64,7 @@ export default async function TareasEstudiante({
                 ))
                 
             }
-            <EnviarTarea tarea_enviada={tarea_enviada as unknown as EnvioDeTarea[]} session={session as unknown as Session} addTarea={addTarea} idTarea={id} idEstudiante={idEstudiante as unknown as string}/>
+            <EnviarTarea tarea_enviada={tarea_enviada as unknown as EnvioDeTarea[]} session={session as unknown as Session} addTarea={addTarea} tarea={tarea as unknown as Tarea[]} idTarea={id} idEstudiante={idEstudiante as unknown as string}/>
        </section>
     )
 

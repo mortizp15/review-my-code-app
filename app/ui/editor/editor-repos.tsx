@@ -4,7 +4,7 @@ import { ICON } from "@/app/layout";
 import { getContenidoArchivo, getContenidoRepo } from "@/app/lib/services";
 import Editor from "@monaco-editor/react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function EditorRepos({
   enviarComentario,
@@ -32,7 +32,6 @@ export default function EditorRepos({
     //                                              ESTE EDITOR ESTÁ EN MODO DE SOLO LECTURA                                                  
   `);
 
-  let idTimeout: any;
 
   // Llamar a la API de GitHub para obtener el contenido del repositorio
   useEffect(() => {
@@ -48,13 +47,13 @@ export default function EditorRepos({
   const handleSubmit = (formData: FormData) => {
     enviarComentario(formData);
     setEnviado(true);
-    idTimeout = setTimeout(() => {
+    setTimeout(() => {
       setEnviado(false);
     }, 4000);
   };
 
   function b64DecodeUnicode(str: string) {
-    // Decodifica primero a bytes escapados y luego decodifica el escape con decodeURIComponent
+    // Decodificar primero a bytes escapados y luego decodificar el escape con decodeURIComponent
     return decodeURIComponent(
       Array.prototype.map
         .call(atob(str), function (c) {
