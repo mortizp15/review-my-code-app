@@ -1,6 +1,5 @@
 "use client";
 
-import { ICON } from "@/app/layout";
 import { getContenidoArchivo, getContenidoRepo } from "@/app/lib/services";
 import Editor from "@monaco-editor/react";
 import Link from "next/link";
@@ -15,6 +14,8 @@ export default function EditorRepos({
   owner: string;
   nombreRepo: string;
 }) {
+
+  const ICON = "</>"
   const [enviado, setEnviado] = useState(false);
   const [fileTree, setFileTree] = useState<{ path: string }[]>([]);
   const [code, setCode] = useState(`

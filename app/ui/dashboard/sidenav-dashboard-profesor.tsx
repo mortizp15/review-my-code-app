@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import SignOut from "./signout";
-import { ICON } from "@/app/layout";
 import { GoHome } from "react-icons/go";
 import { MdOutlineClass } from "react-icons/md";
 import { PiChalkboardTeacher } from "react-icons/pi";
@@ -11,6 +10,7 @@ import { useState } from "react";
 export default function SidenavDashboardProfesor() {
 
     const [activo, setActivo] = useState("")
+    const ICON = "</>"
 
     const handleClick = (ruta: string) => {
         setActivo(ruta)

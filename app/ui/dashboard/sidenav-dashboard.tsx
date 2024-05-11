@@ -5,7 +5,6 @@ import SignOut from "./signout";
 import { Curso } from "@/app/lib/definitions";
 import { FaRegFolder } from "react-icons/fa";
 import { GoHome } from "react-icons/go";
-import { ICON } from "@/app/layout";
 import { IoGitNetworkOutline } from "react-icons/io5";
 import { LuEye } from "react-icons/lu";
 
@@ -14,6 +13,9 @@ export default function SideNavDashBoard({
 }: {
   cursos: Curso[] | undefined;
 }) {
+
+  const ICON = "</>"
+
   return (
     <div className="bg-[#19181D] flex flex-col justify-between items-center left-0 w-[20rem] border-r-2 border-r-[#333] h-full p-10 ">
       <div className="flex flex-col mt-5  h-[80%] overflow-auto">

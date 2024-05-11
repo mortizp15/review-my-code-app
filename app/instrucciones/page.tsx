@@ -63,14 +63,14 @@ export default function Intrucciones() {
           ¡Bienvenido a ReviewMyCode! Si eres un nuevo usuario y deseas acceder
           a la aplicación, necesitarás solicitar un rol apropiado a través del
           proceso de registro. Aunque ya has realizado el registro con Github,
-          se te asigna un rol de{" "}
+          se te asigna un rol de 
           <Link href="/instrucciones/alumnos" className="text-[#77adff]">
             estudiante 
           </Link>
-          {" "}por defecto . A continuación, te explicamos cómo solicitar un rol de{" "}
+          por defecto . A continuación, te explicamos cómo solicitar un rol de 
           <Link href="/instrucciones/profesores" className="text-[#77adff]">
             profesor
-          </Link>{" "}
+          </Link>
           en la aplicación:
         </p>
         <br />
@@ -78,7 +78,7 @@ export default function Intrucciones() {
           Paso 1: Contacta con el Administrador del Centro
         </h2>
         <p className="mt-2">
-          Para solicitar un rol de{" "}
+          Para solicitar un rol de
           <Link href="/instrucciones/profesores" className="text-[#77adff]">
             profesor
           </Link>{" "}
@@ -108,7 +108,7 @@ export default function Intrucciones() {
         </h2>
         <p className="mt-2">
           Una vez que te confirmen que has sido registrado como profesor u otro rol,
-          deberás acceder al "Entrar" que esta justo a la izquierda de tu avatar de usuario.
+          deberás acceder al &quot;Entrar&quot; que esta justo a la izquierda de tu avatar de usuario.
           Dentro, podrás realizar las acciones permitidas para tu rol.
           Puedes leer mas sobre los roles aquí: <Link href="/instrucciones/alumnos" className="text-[#77adff]">
             ALUMNOS

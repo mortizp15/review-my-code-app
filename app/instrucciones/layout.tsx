@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ICON } from "../layout";
 import NavLinks from "../ui/home/nav-links";
 import { cookies } from "next/headers";
 import SideNav from "../ui/docs-ui/sidenav";
@@ -12,6 +11,7 @@ export default async function PageLayout({ children } : {
 
     const supabase = createServerComponentClient({ cookies })
     const { data: { session } } = await supabase.auth.getSession()
+    const ICON = "</>"
     
     return (
       <div className="h-screen ">

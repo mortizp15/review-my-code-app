@@ -3,8 +3,6 @@
 import "./globals.css";
 import { montserrat } from "./ui/fonts";
 
-export const ICON = "</>"
-
 export default function RootLayout({
   children,
 }: Readonly<{

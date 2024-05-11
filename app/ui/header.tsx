@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ICON } from "../layout";
 import NavLinks from "./home/nav-links";
 import BotonAuth from "./boton-auth";
 import { cookies } from "next/headers";
@@ -10,6 +9,7 @@ export default async function Header() {
 
   const supabase = createServerComponentClient({ cookies })
   const { data: { session } } = await supabase.auth.getSession()
+  const ICON = "</>"
 
     return (
         <header className="text-sm flex items-center h-20 justify-between w-3/5 border-b border-[#e2e2e233] mx-auto">
