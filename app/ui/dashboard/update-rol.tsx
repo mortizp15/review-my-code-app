@@ -38,7 +38,7 @@ export default function UpdateRol({ session } : { session: Session | null }) {
                                 marginBottom: "15px"
                             }}/>
                             <h1 className="text-[#77adff] font-bold text-[25px]">Rol de Estudiante</h1>
-                            <button className="iniciarSesion text-white font-medium mt-4 px-4 py-2 rounded-full transition bg-[linear-gradient(#6C3BF5,#3F8CFF)]" onClick={() => handleClick(session?.user.user_metadata.user_name, "estudiante")}>Estudiante</button>
+                            <h2 className="text-white font-semibold mt-3">Pincha encima</h2>
                         </div>
                         <div onClick={() => handleClick(session?.user.user_metadata.user_name, "profesor")} className="cursor-pointer rounded-[10px] flex flex-col justify-center transition hover:bg-[#ffffff0a] text-center items-center w-[30%] h-[60%]">
                             <PiChalkboardTeacherLight style={{
@@ -47,7 +47,7 @@ export default function UpdateRol({ session } : { session: Session | null }) {
                                 marginBottom: "15px"
                             }}/>
                             <h1 className="text-[#77adff] font-bold text-[25px]">Rol de Profesor</h1>
-                            <button className="iniciarSesion text-white font-medium mt-4 px-6 py-2 rounded-full transition bg-[linear-gradient(#6C3BF5,#3F8CFF)]" onClick={() => handleClick(session?.user.user_metadata.user_name, "profesor")}>Profesor</button>
+                            <h2 className="text-white font-semibold mt-3">Pincha encima</h2>
                         </div>
                     </div>
             </div>
