@@ -1,6 +1,5 @@
 'use client'
 
-import Head from "next/head";
 import "./globals.css";
 import { montserrat } from "./ui/fonts";
 

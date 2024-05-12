@@ -12,7 +12,7 @@ export default function BotonAuth({ session } : { session: Session | null }) {
         await supabase.auth.signInWithOAuth({
             provider: "github",
             options: {
-                redirectTo: "https://review-my-code-app.vercel.app/auth/callback"
+                redirectTo: "https://www.reviewmycode.org/auth/callback"
             }
         })
     }
