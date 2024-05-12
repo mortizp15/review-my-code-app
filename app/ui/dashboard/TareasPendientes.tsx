@@ -1,4 +1,5 @@
 import { TypeTareasPendientes } from "@/app/dashboard/dashboard-home-estudiante/curso/page";
+import { format } from "date-fns";
 import Link from "next/link";
 import { IoAlertCircleOutline } from "react-icons/io5";
 
@@ -19,7 +20,7 @@ export default function TareasPendientes({ tareasPendientes } : { tareasPendient
                             <div className="flex items-center justify-between">
                                 <div>
                                     <h3>{tarea.descripcion_tarea}</h3>
-                                    <p className="text-gray-400 font-normal text-[14px] overflow-ellipsis overflow-hidden">Fecha de finalización: {tarea.fecha_finalizacion ? new Date(tarea.fecha_finalizacion).toLocaleDateString() : ''}</p>
+                                    <p className="text-gray-400 font-normal text-[14px] overflow-ellipsis overflow-hidden">Fecha de finalización: {format(new Date(), "MMMM d, yyyy")}</p>
                                     <p className="text-gray-400 font-normal text-[14px] overflow-ellipsis overflow-hidden">Curso: {tarea.nombre_curso}</p>
                                 </div>
                                 <button
