@@ -11,11 +11,11 @@ export default async function CorreccionesPage() {
         <section className="w-[90%] h-full text-white">
             <div className="w-[50%] h-full mx-auto">
                 {
-                    comentarios ? (
+                    comentarios?.length !== 0 ? (
                         <>
                         <h1 className="flex mt-14 items-center font-semibold text-[20px]"><IoWarningOutline style={{ marginRight: "10px", fontSize: "25px", color: "rgb(37 99 235)" }}/> ¡Tienes nuevas revisiones!</h1>
                             {
-                                comentarios.map((comentario) => (
+                                comentarios?.map((comentario) => (
                                     
                                         <div key={comentario.id_envio_tarea} className="border-[1px] border-[#5f5f5f81] transition hover:bg-[#234] h-fit w-full p-5 rounded-md mt-5 flex items-center">
                                             <div className="rounded-full flex items-center justify-center p-3 bg-blue-600">
