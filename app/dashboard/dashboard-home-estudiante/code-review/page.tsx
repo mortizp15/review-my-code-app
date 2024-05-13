@@ -34,7 +34,7 @@ export default async function CorreccionesPage() {
                             }
                         </>                        
                     ) : (
-                        <h1 className="flex items-center font-semibold text-[20px]"><AiOutlineLike style={{ marginRight: "10px", fontSize: "25px", color: "rgb(37 99 235)" }}/> No tienes revisiones por ahora</h1>
+                        <h1 className="flex mt-14 items-center font-semibold text-[20px]"><AiOutlineLike style={{ marginRight: "10px", fontSize: "25px", color: "rgb(37 99 235)" }}/> No tienes revisiones por ahora</h1>
                     )
                 }
             </div>

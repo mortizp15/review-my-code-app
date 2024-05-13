@@ -21,7 +21,7 @@ export default function SidenavDashboardProfesor() {
       <div className="flex flex-col mt-5 h-[80%] overflow-auto">
         <Link
           href="/"
-          className="font-bold text-[19px] border-2 border-2-white p-2 rounded-full flex items-center text-white mx-auto mb-14"
+          className="font-bold text-[19px] border-2 border-2-white p-2 rounded-full flex items-center justify-center text-white mx-auto mb-14"
         >
           {ICON}
         </Link>

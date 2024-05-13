@@ -56,11 +56,11 @@ export default function Intrucciones() {
           a la aplicación, necesitarás solicitar un rol apropiado a través del
           proceso de registro. Aunque ya has realizado el registro con Github,
           se te asigna un rol de <strong>inivtado</strong> por defecto. 
-          A continuación, te explicamos cómo solicitar un rol de <Link href="/instrucciones/profesores" className="text-[#77adff]">
+          A continuación, te explicamos cómo solicitar un rol de <strong className="text-[#77adff]">
             profesor 
-          </Link> o <Link href="/instrucciones/estudiantes" className="text-[#77adff]">
+          </strong> o <strong className="text-[#77adff]">
              estudiante
-          </Link> en la aplicación:
+          </strong> en la aplicación:
         </p>
         <br />
         <h2 className="text-[25px] font-semibold">
@@ -78,8 +78,7 @@ export default function Intrucciones() {
         <p className="mt-2">
           Como ves, es bastante sencillo, pero hay que tener en cuenta una cosa: no está permitido cambiar el rol por tu cuenta una vez que se ha seleccionado.
           Para ello, es necesario contactar con el administrador del centro / institución para que nos solicite el cambio.
-          Si quieres saber más sobre los roles, visita la sección de <Link href="/instrucciones/estudiantes" className="text-[#77adff]">estudiante</Link> o 
-          la de <Link href="/instrucciones/profesores" className="text-[#77adff]">profesor</Link>
+          Esto sería todo, esperamos que te sea util esta guía y que disfrutes de la aplicación. ¡Bienvenido a ReviewMyCode!
         </p>
       </article>
     </div>

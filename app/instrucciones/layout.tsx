@@ -1,7 +1,6 @@
 import Link from "next/link";
 import NavLinks from "../ui/home/nav-links";
 import { cookies } from "next/headers";
-import SideNav from "../ui/docs-ui/sidenav";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import BotonAuth from "../ui/boton-auth";
 import { Analytics } from "@vercel/analytics/react";
@@ -47,7 +46,6 @@ export default async function PageLayout({
           </div>
         </header>
         <section className="bg-[#090909] w-full h-full pt-20 flex">
-          <SideNav />
           {children}
           <Analytics />
         </section>
