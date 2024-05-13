@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import SideNav from "../ui/docs-ui/sidenav";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import BotonAuth from "../ui/boton-auth";
+import { Analytics } from "@vercel/analytics/react";
 
 export default async function PageLayout({ children } : {
   children: React.ReactNode
@@ -38,6 +39,7 @@ export default async function PageLayout({ children } : {
         <section className="bg-[#090909] w-full h-full pt-20 flex">
           <SideNav />
           {children}
+          <Analytics />
         </section>
       </div>
     )
