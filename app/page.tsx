@@ -11,17 +11,17 @@ export default async function Home() {
     <>
       <Header />
       <section className="mt-32 w-full flex flex-col items-center">
-        <div
+        <h1
           style={{ border: "1px solid gray" }}
           className="text-white font-light text-sm bg-[#c8c8c821] px-8 py-1 rounded-full animate__animated animate__fadeIn"
         >
           ReviewMyCode 2024
-        </div>
-        <h1
+        </h1>
+        <h2
           className="text-white text-[80px] w-1/2 text-center font-medium mt-10 leading-tight animate__animated animate__fadeIn"
         >
           Plataforma de Code Review para profesores
-        </h1>
+        </h2>
         <h3
           className="mt-14 text-[#a0a0a0] w-1/3 text-xl text-center animate__animated animate__fadeIn"
         >
