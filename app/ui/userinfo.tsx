@@ -28,7 +28,7 @@ export default function UserInfo({ handleSignOut, session }: UserInfoProps) {
           onClick={toggleDropdown}
         />
         {isOpen && (
-          <div className="absolute z-10 bg-white divide-y -translate-x-32 divide-gray-100 rounded-md shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+          <div className="absolute z-10 bg-gray-700 divide-y -translate-x-32 divide-gray-100 rounded-md shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
             <ul
               className="py-2 text-sm text-gray-700 dark:text-gray-200"
               aria-labelledby="dropdownDividerButton"
