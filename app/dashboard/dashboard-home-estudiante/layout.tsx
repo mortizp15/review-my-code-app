@@ -6,38 +6,49 @@ import { Analytics } from "@vercel/analytics/react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export default async function DashboardEstudianteLayout({ children } : {
-    children: React.ReactNode
+export default async function DashboardEstudianteLayout({
+  children,
+}: {
+  children: React.ReactNode;
 }) {
-    
-    const supabase = createServerComponentClient({ cookies })
-    const { data: { session } } = await supabase.auth.getSession()
+  const supabase = createServerComponentClient({ cookies });
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
-    let { data: rol } = await supabase
-        .from("usuario")
-        .select("rol")
-        .eq("username", session?.user.user_metadata.user_name);
+  let { data: rol } = await supabase
+    .from("usuario")
+    .select("rol")
+    .eq("username", session?.user.user_metadata.user_name);
 
-    let rolObjetivo: string = "";
+  let rolObjetivo: string = "";
 
-    rol?.map((rolBuscado) => {
-        const { rol: rolResultado } = rolBuscado;
+  rol?.map((rolBuscado) => {
+    const { rol: rolResultado } = rolBuscado;
 
-        rolObjetivo = rolResultado;
-    });
+    rolObjetivo = rolResultado;
+  });
 
-    if (rolObjetivo !== "estudiante") {
-        redirect("/dashboard");
-    }
+  if (rolObjetivo !== "estudiante") {
+    redirect("/dashboard");
+  }
 
-    
-    const estudiante_curso = await getCursosDeEstudiante();
+  const estudiante_curso = await getCursosDeEstudiante();
 
-    return (
-        <section className="w-full h-full flex bg-[#111111]">
-            <SideNavDashBoard cursos={ estudiante_curso?.map(item => item.curso) as unknown as Curso[] || [] }/>
-            {children}
-            <Analytics />
-        </section>
-    )
+  return (
+    <html lang="es">
+      <title>Dashboard Estudiante</title>
+      <section className="w-full h-full flex bg-[#111111]">
+        <SideNavDashBoard
+          cursos={
+            (estudiante_curso?.map(
+              (item) => item.curso
+            ) as unknown as Curso[]) || []
+          }
+        />
+        {children}
+        <Analytics />
+      </section>
+    </html>
+  );
 }

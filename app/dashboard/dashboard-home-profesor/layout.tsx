@@ -5,10 +5,13 @@ export default function PageProfesor({ children } : {
     children: React.ReactNode
 }) {
     return (
-    <section className="w-full h-full flex bg-[#111111]">
-        <SidenavDashboardProfesor />
-        {children}
-        <Analytics />
-    </section>
+    <html lang="es">
+        <title>Dashboard Profesor</title>
+        <section className="w-full h-full flex bg-[#111111]">
+            <SidenavDashboardProfesor />
+            {children}
+            <Analytics />
+        </section>
+    </html>
     )
 }
