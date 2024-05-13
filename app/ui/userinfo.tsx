@@ -41,7 +41,7 @@ export default function UserInfo({ handleSignOut, session }: UserInfoProps) {
               <li>
                 <button
                   onClick={handleSignOut}
-                  className="block px-4 py-2 text-sm w-full text-white hover:bg-gray-100 dark:hover:bg-gray-600"
+                  className="block px-4 py-2 text-sm w-full text-white hover:bg-gray-600 dark:hover:bg-gray-600"
                 >
                   Cerrar Sesión
                 </button>
