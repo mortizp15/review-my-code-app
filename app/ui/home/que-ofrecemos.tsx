@@ -26,7 +26,7 @@ export default function QueOfrecemos() {
                     }} />
                     <h3 className="mt-6 font-semibold text-xl">Editor de Código</h3>
                     <p className="text-center mt-5 text-[#dddddd]">
-                        Comenta, corrige, añade o elimina líneas de código sin tener que abrir ningun IDE.
+                        Comenta o corrige líneas de código sin tener que abrir ningun IDE.
                     </p>
                 </div>
                 <div className="w-[320px] rounded-md p-5 h-96 flex flex-col items-center">
