@@ -34,7 +34,7 @@ export default function UserInfo({ handleSignOut, session }: UserInfoProps) {
               aria-labelledby="dropdownDividerButton"
             >
               <li>
-                <span className="block px-4 py-2 text-sm text-center text-white hover:bg-gray-100 dark:hover:bg-gray-600">
+                <span className="block px-4 py-2 text-sm text-center text-white hover:bg-gray-600 dark:hover:bg-gray-600">
                   {session?.user?.user_metadata?.user_name}
                 </span>
               </li>
