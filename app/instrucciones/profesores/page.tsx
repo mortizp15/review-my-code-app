@@ -13,9 +13,6 @@ export default function Page() {
         <article className="mx-64 mt-14">
             <h1 className="text-[40px] font-semibold">¿Cómo puedo crear un curso?</h1>
             <p className="mt-5 text-wrap">
-                Para crear un curso, simplemente debes ir a la pestaña de "Cursos" y darle al botón de "Crear Curso". 
-                Una vez hecho esto, se te redirigirá a una página en la que deberás rellenar los campos necesarios para la creación del curso.
-                Una vez creado, podrás añadir estudiantes a este curso y asignar tareas a los mismos.
             </p>
         </article>
     </div>
