@@ -19,15 +19,12 @@ export default function Intrucciones() {
         </p>
         <br />
         <p className="mt-5 text-wrap">
-          <strong className="text-[#77adff]">1. Revisión de Código en Tiempo Real</strong>
+          <strong className="text-[#77adff]">1. Revisión de Código desde el navegador</strong>
         </p>
         <p className="mt-2">
-          PlataformaCode permite a los profesores y estudiantes realizar
-          revisiones de código en tiempo real, lo que facilita la identificación
-          y corrección de errores de manera rápida y eficiente. La capacidad de
-          revisar el código mientras se está escribiendo promueve una
-          retroalimentación inmediata y ayuda a los estudiantes a mejorar sus
-          habilidades de programación de manera proactiva. 
+          ReviewMyCode permite a los profesores y estudiantes realizar
+          revisiones de código desde un editor integrado en el navegador, lo que facilita la identificación
+          y corrección de errores de manera rápida y sin necesidad de descargar nada. 
         </p>
         <br />
         <p>
@@ -46,13 +43,8 @@ export default function Intrucciones() {
           <strong className="text-[#77adff]">3. Seguimiento del Progreso y Desempeño</strong>
         </p>
         <p className="mt-2">
-          PlataformaCode permite a los
-          profesores realizar un seguimiento del progreso y desempeño de los
-          estudiantes a lo largo del tiempo, lo que facilita la evaluación y
-          calificación del trabajo realizado. Los informes y estadísticas
-          detalladas brindan una visión completa del rendimiento de cada
-          estudiante, lo que permite una evaluación más precisa y una
-          retroalimentación individualizada.
+          ReviewMyCode permite a los profesores realizar un seguimiento del progreso y desempeño de sus estudiantes
+          a través de plazos de entrega y listados de entregas.
         </p>
       </article>
       <article className="mx-64 mt-14">
@@ -60,61 +52,34 @@ export default function Intrucciones() {
           Solicitar un Rol en la Aplicación
         </h1>
         <p className="mt-5 text-wrap">
-          ¡Bienvenido a ReviewMyCode! Si eres un nuevo usuario y deseas acceder
+          Si eres un nuevo usuario y deseas acceder
           a la aplicación, necesitarás solicitar un rol apropiado a través del
           proceso de registro. Aunque ya has realizado el registro con Github,
-          se te asigna un rol de 
-          <Link href="/instrucciones/alumnos" className="text-[#77adff]">
-            estudiante 
-          </Link>
-          por defecto . A continuación, te explicamos cómo solicitar un rol de 
-          <Link href="/instrucciones/profesores" className="text-[#77adff]">
-            profesor
-          </Link>
-          en la aplicación:
+          se te asigna un rol de <strong>inivtado</strong> por defecto. 
+          A continuación, te explicamos cómo solicitar un rol de <Link href="/instrucciones/profesores" className="text-[#77adff]">
+            profesor 
+          </Link> o <Link href="/instrucciones/estudiantes" className="text-[#77adff]">
+             estudiante
+          </Link> en la aplicación:
         </p>
         <br />
         <h2 className="text-[25px] font-semibold">
-          Paso 1: Contacta con el Administrador del Centro
+          Paso 1: Entra al dashboard
         </h2>
         <p className="mt-2">
-          Para solicitar un rol de
-          <Link href="/instrucciones/profesores" className="text-[#77adff]">
-            profesor
-          </Link>{" "}
-          en ReviewMyCode, primero debes ponerte en contacto con el
-          administrador del centro educativo al que estás afiliado. El
-          administrador es responsable de gestionar los roles de sus profesores
-          en la aplicación y puede ayudarte a obtener acceso según tus
-          necesidades específicas.
+          En la esquina superior derecha de la página principal, haz clic en el boton &quot;Entrar&quot;.
+          Una vez dentro, se te pedirá que pinches en uno de los dos roles posibles: <strong>profesor</strong> o <strong>estudiante</strong>.
+          Cuando pinches en cualquierda de los dos, automaticamente te redirigirá a la página de inicio de tu dashboard.
         </p>
         <br />
         <h2 className="text-[25px] font-semibold">
-          Paso 2: Proporciona la Información Necesaria
-        </h2>
-        <div className="mt-2">
-          Al comunicarte con el administrador del centro, asegúrate de
-          proporcionar la siguiente información: 
-          <ul className="list-disc ml-10 mt-3">
-            <li>Tu nombre completo</li>
-            <li>Tu dirección de correo electrónico corporativo</li>
-            <li>Cualquier información adicional relevante que pueda ayudar al
-          administrador a procesar tu solicitud de manera más eficiente.</li>
-          </ul>
-        </div>
-        <br />
-        <h2 className="text-[25px] font-semibold">
-          Paso 3: ¡Entra en ReviewMyCode!
+          Paso 2: ¡Entra en ReviewMyCode!
         </h2>
         <p className="mt-2">
-          Una vez que te confirmen que has sido registrado como profesor u otro rol,
-          deberás acceder al &quot;Entrar&quot; que esta justo a la izquierda de tu avatar de usuario.
-          Dentro, podrás realizar las acciones permitidas para tu rol.
-          Puedes leer mas sobre los roles aquí: <Link href="/instrucciones/alumnos" className="text-[#77adff]">
-            ALUMNOS
-          </Link> / <Link href="/instrucciones/profesores" className="text-[#77adff]">
-            PROFESORES
-          </Link>
+          Como ves, es bastante sencillo, pero hay que tener en cuenta una cosa: no está permitido cambiar el rol por tu cuenta una vez que se ha seleccionado.
+          Para ello, es necesario contactar con el administrador del centro / institución para que nos solicite el cambio.
+          Si quieres saber más sobre los roles, visita la sección de <Link href="/instrucciones/estudiantes" className="text-[#77adff]">estudiante</Link> o 
+          la de <Link href="/instrucciones/profesores" className="text-[#77adff]">profesor</Link>
         </p>
       </article>
     </div>

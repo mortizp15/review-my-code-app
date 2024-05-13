@@ -16,6 +16,10 @@
     border-radius: 100px;
 }
 
+body {
+    background: #000;
+}
+
 .iniciarSesion:hover {
     box-shadow: 0 0 10px rgba(183, 124, 255, 0.521);
 }

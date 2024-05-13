@@ -8,7 +8,7 @@ import { MdOutlineDashboard } from "react-icons/md";
 export const opciones =  [
         { nombre: "Comenzar", href: "/instrucciones", icono: MdOutlineNotStarted },
         { nombre: "Profesores", href: "/instrucciones/profesores", icono: PiChalkboardTeacherLight },
-        { nombre: "Estudiantes", href: "/instrucciones/alumnos", icono: PiStudent },
+        { nombre: "Estudiantes", href: "/instrucciones/estudiantes", icono: PiStudent },
         { nombre: "Tareas", href: "/instrucciones/tareas", icono: MdOutlineWorkOutline },
         { nombre: "Correcciones", href: "/instrucciones/correcciones", icono: IoMdCheckmarkCircleOutline },
         { nombre: "Panel", href: "/instrucciones/panel", icono: MdOutlineDashboard },
