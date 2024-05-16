@@ -3,9 +3,7 @@ import TodasTareas from "@/app/ui/profesor/todas-tareas";
 import { createServerActionClient, createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { getTareasByProfesor } from "@/app/lib/actions";
-import { Session } from "next-auth";
 export default async function TareasCreadasPage() {
     
     const supabase = createServerComponentClient({ cookies });
