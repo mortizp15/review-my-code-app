@@ -61,9 +61,12 @@ export default function TablaEstudiantes({ estudiantes, validarAsignacion, asign
             <td className="px-6 py-4 flex items-center justify-center">
             {
               estadosAsignacion[estudiante.id] ? (
-                <div className="bg-blue-400 w-fit px-3 text-white font-medium py-1 rounded-full">
-                  Asignado
-                </div>
+                <button onClick={() => handleAsignar(estudiante.id)} className="bg-green-400 px-3 text-white font-medium py-1 rounded-full">
+                  Asignar
+                </button>
+                // <div className="bg-blue-400 w-fit px-3 text-white font-medium py-1 rounded-full">
+                //   Asignado
+                // </div>
               ) : (
                 <button onClick={() => handleAsignar(estudiante.id)} className="bg-green-400 px-3 text-white font-medium py-1 rounded-full">
                   Asignar
