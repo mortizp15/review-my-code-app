@@ -40,20 +40,24 @@ export default async function AsignarEstudiante({ searchParams } : { searchParam
         const supabase = createServerActionClient({ cookies })
         const validarRelacion = await validarAsignacion(idEstudiante)
                  
+        console.log("ID ESTUDIANTE: ", idEstudiante)
+        console.log("ID CURSO: ", id)
 
         if(validarRelacion) {
-            await supabase
+           const { error } = await supabase
             .from("estudiante_curso")
             .insert([{ id_estudiante: idEstudiante, id_curso: id }])
             .select()
 
-            return true
-        } else {
-            console.log("Ya esta asignado")
+            if (error) {
+                console.error('Error al insertar:', error)
+                return false
+            }
 
-            return false
-        }
+            return true
+        } 
        
+        return false
 
     }
 
