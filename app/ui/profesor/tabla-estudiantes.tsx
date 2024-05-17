@@ -22,9 +22,6 @@ export default function TablaEstudiantes({ estudiantes, asignarEstudiante } : { 
             #
           </th>
           <th scope="col" className="text-center px-6 py-3">
-            Nombre
-          </th>
-          <th scope="col" className="text-center px-6 py-3">
             Usuario
           </th>
           <th scope="col" className="text-center px-6 py-3">
@@ -47,7 +44,6 @@ export default function TablaEstudiantes({ estudiantes, asignarEstudiante } : { 
                 alt="avatar"
               />
             </td>
-            <td className="px-6 py-4 text-center">{estudiante.nombre}</td>
             <td className="px-6 py-4 text-center">{estudiante.username}</td>
             <td className="px-6 py-4 flex items-center justify-center">
             {
