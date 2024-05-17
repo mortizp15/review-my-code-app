@@ -10,18 +10,36 @@ export default async function AsignarEstudiante({ searchParams } : { searchParam
     const estudiantes = await getEstudiantes();
 
     // Asignar estudiante a un curso
-    const asignarEstudiante = async (idEstudiante: string) => {
+    const asignarEstudiante = async (idEstudiante: string) : Promise<boolean> => {
 
         "use server"
 
+        let asignado: boolean = false
         const supabase = createServerActionClient({ cookies })
 
-        const { data, error } = await supabase
+         // Validar si ya esta apuntado al curso
+         const { data: asignacionExistente } = await supabase
+         .from("estudiante_curso")
+         .select()
+         .match({ id_estudiante: idEstudiante, id_curso: id })
+         .single();
+
+        // Si ya existe la asignación, evitar insertar duplicado
+        if (asignacionExistente) {
+            return Promise.resolve(asignado)
+        }
+
+        const { data } = await supabase
             .from("estudiante_curso")
             .insert([{ id_estudiante: idEstudiante, id_curso: id }])
             .select()
 
-        console.log(error)
+        if(data !== null) {
+            asignado = true
+            return Promise.resolve(asignado)
+        }
+
+        return Promise.resolve(asignado)
     }
 
     return (

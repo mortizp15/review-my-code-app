@@ -4,14 +4,18 @@ import { EstudianteSearch } from "@/app/lib/types";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function TablaEstudiantes({ estudiantes, asignarEstudiante } : { estudiantes: EstudianteSearch[], asignarEstudiante: (idEstudiante: string) => void}) {
+export default function TablaEstudiantes({ estudiantes, asignarEstudiante } : { estudiantes: EstudianteSearch[], asignarEstudiante: (idEstudiante: string) => Promise<boolean>}) {
   
     const [asignado, setAsignado] = useState(false)
 
     const handleAsignar = (idEstudiante: string) => {
         console.log(idEstudiante)
-        asignarEstudiante(idEstudiante)
-        setAsignado(true)
+        const estudianteAsignado = asignarEstudiante(idEstudiante)
+        estudianteAsignado.then((res) => {
+            if(res) {
+                setAsignado(true)
+            }
+        })
     }
 
     return (
