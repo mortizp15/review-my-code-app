@@ -20,11 +20,13 @@ export default function TablaEstudiantes({ estudiantes, validarAsignacion, asign
         cargarEstadosAsignacion();
     }, [estudiantes])
 
-    const handleAsignar = async (idEstudiante: string) => {
-        const asignado = await asignarEstudiante(idEstudiante);
-        if (asignado) {
-            setEstadosAsignacion(prev => ({ ...prev, [idEstudiante]: false }))
-        }
+    const handleAsignar = (idEstudiante: string) => {
+        const asignado = asignarEstudiante(idEstudiante);
+        asignado.then((res) => {
+          if(res) {
+            setEstadosAsignacion((prev) => ({ ...prev, [idEstudiante]: true }));
+          }
+        })
     }
 
     return (
