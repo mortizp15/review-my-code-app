@@ -9,12 +9,11 @@ export default async function AsignarEstudiante({ searchParams } : { searchParam
     const id = searchParams.idCurso;
     const estudiantes = await getEstudiantes();
 
-    // Asignar estudiante a un curso
-    const asignarEstudiante = async (idEstudiante: string) : Promise<boolean> => {
+    // Validar estudiante relacionado
+    const validarAsignacion = async (idEstudiante: string) : Promise<boolean> => {
 
         "use server"
 
-        let asignado: boolean = false
         const supabase = createServerActionClient({ cookies })
 
          // Validar si ya esta apuntado al curso
@@ -26,20 +25,36 @@ export default async function AsignarEstudiante({ searchParams } : { searchParam
 
         // Si ya existe la asignación, evitar insertar duplicado
         if (asignacionExistente) {
-            return Promise.resolve(asignado)
+            return false
+        } else {
+            return true
         }
+    }
 
-        const { data } = await supabase
+
+    // Asignar estudiante a un curso
+    const asignarEstudiante = async (idEstudiante: string) : Promise<boolean> => {
+
+        "use server"
+
+        const supabase = createServerActionClient({ cookies })
+        const validarRelacion = await validarAsignacion(idEstudiante)
+                 
+
+        if(validarRelacion) {
+            await supabase
             .from("estudiante_curso")
             .insert([{ id_estudiante: idEstudiante, id_curso: id }])
             .select()
 
-        if(data !== null) {
-            asignado = true
-            return Promise.resolve(asignado)
-        }
+            return true
+        } else {
+            console.log("Ya esta asignado")
 
-        return Promise.resolve(asignado)
+            return false
+        }
+       
+
     }
 
     return (
@@ -47,7 +62,7 @@ export default async function AsignarEstudiante({ searchParams } : { searchParam
             <h1 className="text-white mb-10 font-semibold text-[30px]">Asignar Estudiante</h1>
             
             <div className="relative w-[50%] overflow-x-auto max-h-96 overflow-y-auto shadow-md sm:rounded-lg">
-                <TablaEstudiantes estudiantes={estudiantes as unknown as EstudianteSearch[]} asignarEstudiante={asignarEstudiante}/>
+                <TablaEstudiantes estudiantes={estudiantes as unknown as EstudianteSearch[]} validarAsignacion={validarAsignacion} asignarEstudiante={asignarEstudiante}/>
             </div>
         </section>
     )

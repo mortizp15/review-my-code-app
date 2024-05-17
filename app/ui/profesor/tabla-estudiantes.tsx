@@ -2,20 +2,29 @@
 
 import { EstudianteSearch } from "@/app/lib/types";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function TablaEstudiantes({ estudiantes, asignarEstudiante } : { estudiantes: EstudianteSearch[], asignarEstudiante: (idEstudiante: string) => Promise<boolean>}) {
+export default function TablaEstudiantes({ estudiantes, validarAsignacion, asignarEstudiante } : { estudiantes: EstudianteSearch[], validarAsignacion: (idEstudiante: string) => Promise<boolean>, asignarEstudiante: (idEstudiante: string) => Promise<boolean>}) {
   
-    const [asignado, setAsignado] = useState(false)
+    const [estadosAsignacion, setEstadosAsignacion] = useState<{ [key: string]: boolean }>({});
 
-    const handleAsignar = (idEstudiante: string) => {
-        console.log(idEstudiante)
-        const estudianteAsignado = asignarEstudiante(idEstudiante)
-        estudianteAsignado.then((res) => {
-            if(res) {
-                setAsignado(true)
+      useEffect(() => {
+        const cargarEstadosAsignacion = async () => {
+            const estados: { [key: string]: boolean } = {}
+            for (const estudiante of estudiantes) {
+              const asignado = await validarAsignacion(estudiante.id);
+              estados[estudiante.id] = asignado;
             }
-        })
+            setEstadosAsignacion(estados);
+        };
+        cargarEstadosAsignacion();
+    }, [estudiantes])
+
+    const handleAsignar = async (idEstudiante: string) => {
+        const asignado = await asignarEstudiante(idEstudiante);
+        if (asignado) {
+            setEstadosAsignacion(prev => ({ ...prev, [idEstudiante]: false }))
+        }
     }
 
     return (
@@ -51,7 +60,7 @@ export default function TablaEstudiantes({ estudiantes, asignarEstudiante } : { 
             <td className="px-6 py-4 text-center">{estudiante.username}</td>
             <td className="px-6 py-4 flex items-center justify-center">
             {
-              asignado ? (
+              estadosAsignacion[estudiante.id] ? (
                 <div className="bg-blue-400 w-fit px-3 text-white font-medium py-1 rounded-full">
                   Asignado
                 </div>
