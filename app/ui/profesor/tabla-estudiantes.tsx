@@ -4,7 +4,7 @@ import { EstudianteSearch } from "@/app/lib/types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export default function TablaEstudiantes({ estudiantes, validarAsignacion, asignarEstudiante } : { estudiantes: EstudianteSearch[], validarAsignacion: (idEstudiante: string) => Promise<boolean>, asignarEstudiante: (idEstudiante: string) => Promise<boolean>}) {
+export default function TablaEstudiantes({ desasignarEstudiante, estudiantes, validarAsignacion, asignarEstudiante } : { desasignarEstudiante: (idEstudiante: string) => void, estudiantes: EstudianteSearch[], validarAsignacion: (idEstudiante: string) => Promise<boolean>, asignarEstudiante: (idEstudiante: string) => Promise<boolean>}) {
   
     const [estadosAsignacion, setEstadosAsignacion] = useState<{ [key: string]: boolean }>({});
 
@@ -27,6 +27,11 @@ export default function TablaEstudiantes({ estudiantes, validarAsignacion, asign
             setEstadosAsignacion((prev) => ({ ...prev, [idEstudiante]: true }));
           }
         })
+    }
+
+    const handleDesasignar = (idEstudiante: string) => {
+        desasignarEstudiante(idEstudiante)
+        setEstadosAsignacion((prev) => ({ ...prev, [idEstudiante]: false }))
     }
 
     return (
@@ -63,8 +68,8 @@ export default function TablaEstudiantes({ estudiantes, validarAsignacion, asign
             <td className="px-6 py-4 flex items-center justify-center">
             {
               estadosAsignacion[estudiante.id] ? (
-                <div className="bg-blue-400 w-fit px-3 text-white font-medium py-1 rounded-full">
-                  Asignado
+                <div onClick={() => handleDesasignar(estudiante.id)} className="bg-red-400 w-fit px-3 text-white font-medium py-1 rounded-full">
+                  Desasignar
                 </div>
               ) : (
                 <button onClick={() => handleAsignar(estudiante.id)} className="bg-green-400 px-3 text-white font-medium py-1 rounded-full">
