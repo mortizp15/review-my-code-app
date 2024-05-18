@@ -1,10 +1,11 @@
 "use client"
 
+import { validarAsignacion } from "@/app/lib/actions";
 import { EstudianteSearch } from "@/app/lib/types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export default function TablaEstudiantes({ desasignarEstudiante, estudiantes, validarAsignacion, asignarEstudiante } : { desasignarEstudiante: (idEstudiante: string) => void, estudiantes: EstudianteSearch[], validarAsignacion: (idEstudiante: string) => Promise<boolean>, asignarEstudiante: (idEstudiante: string) => Promise<boolean>}) {
+export default function TablaEstudiantes({ idCurso, desasignarEstudiante, estudiantes, asignarEstudiante } : { idCurso: string, desasignarEstudiante: (idEstudiante: string) => void, estudiantes: EstudianteSearch[], asignarEstudiante: (idEstudiante: string) => Promise<boolean>}) {
   
     const [estadosAsignacion, setEstadosAsignacion] = useState<{ [key: string]: boolean }>({});
 
@@ -12,7 +13,7 @@ export default function TablaEstudiantes({ desasignarEstudiante, estudiantes, va
         const cargarEstadosAsignacion = async () => {
             const estados: { [key: string]: boolean } = {}
             await Promise.all(estudiantes.map(async (estudiante) => {
-              estados[estudiante.id] = await validarAsignacion(estudiante.id);
+              estados[estudiante.id] = await validarAsignacion(estudiante.id, idCurso);
             }));
             setEstadosAsignacion(estados);
         };
