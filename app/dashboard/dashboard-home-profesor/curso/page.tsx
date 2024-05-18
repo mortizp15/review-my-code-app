@@ -8,7 +8,6 @@ import { Curso, Tarea } from "@/app/lib/definitions";
 import InfoCursoProfesor from "@/app/ui/profesor/info-curso-profesor";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 export default async function CursosProfesorPage({
   searchParams,
@@ -33,7 +32,7 @@ export default async function CursosProfesorPage({
 
     // Si el usuario no es un estudiante, retornar false
     if (usuario?.rol !== 'estudiante') {
-      return false;
+      return true;
     }
 
     let estaEnElCurso: boolean = false
