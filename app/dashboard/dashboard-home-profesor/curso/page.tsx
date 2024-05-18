@@ -36,17 +36,24 @@ export default async function CursosProfesorPage({
       return false;
     }
 
-    const { data: asignacionExistente } = await supabase
-      .from("estudiante_curso")
-      .select()
-      .match({ id_estudiante: idEstudiante, id_curso: id })
-      .single();
+    let estaEnElCurso: boolean = false
 
-    if (asignacionExistente) {
-      return true;
-    } else {
-      return false;
+    if(usuario?.rol === 'estudiante') {
+      const { data: asignacionExistente } = await supabase
+        .from("estudiante_curso")
+        .select()
+        .match({ id_estudiante: idEstudiante, id_curso: id })
+        .single()
+        
+        if (asignacionExistente) {
+          estaEnElCurso = true;
+        } else {
+          estaEnElCurso = false;
+        }
     }
+
+    return estaEnElCurso
+    
   };
 
  
