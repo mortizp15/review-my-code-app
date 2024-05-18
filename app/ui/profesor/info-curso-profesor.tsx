@@ -7,18 +7,7 @@ import { GoPlus } from "react-icons/go";
 import React, { useEffect } from "react";
 import { redirect } from "next/navigation";
 
-export default function InfoCursoProfesor({ estudiantePerteneciente, id, curso, profesor, tareas } : { estudiantePerteneciente: () => Promise<boolean>, id: string, curso: Curso[], profesor: string, tareas: Tarea[] }) {
-
-  useEffect( () => {
-    const pertenece = estudiantePerteneciente()
-    pertenece.then(res => {
-      if(!res) {
-        alert("No perteneces a este curso");
-        redirect("/dashboard/dashboard-home-estudiante")
-      }
-    })
-  }, [])
-  
+export default function InfoCursoProfesor({ id, curso, profesor, tareas } : { id: string, curso: Curso[], profesor: string, tareas: Tarea[] }) { 
 
   return (
     <div className="text-[#ececec] py-14 w-[40%] h-full flex flex-col mx-auto">

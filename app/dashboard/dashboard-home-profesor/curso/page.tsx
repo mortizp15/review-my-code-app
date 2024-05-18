@@ -16,46 +16,6 @@ export default async function CursosProfesorPage({
 }) {
   const { id } = searchParams;
 
-  // Validar estudiante relacionado
-  const estudiantePerteneciente = async (): Promise<boolean> => {
-    "use server";
-
-    const supabase = createServerActionClient({ cookies });
-    const idEstudiante = await getUsuarioId()
-
-    // Obtener el rol del usuario
-    const { data: usuario } = await supabase
-    .from("usuario")
-    .select("rol")
-    .eq("id", idEstudiante)
-    .single();
-
-    // Si el usuario no es un estudiante, retornar false
-    if (usuario?.rol !== 'estudiante') {
-      return true;
-    }
-
-    let estaEnElCurso: boolean = false
-
-    if(usuario?.rol === 'estudiante') {
-      const { data: asignacionExistente } = await supabase
-        .from("estudiante_curso")
-        .select()
-        .match({ id_estudiante: idEstudiante, id_curso: id })
-        .single()
-        
-        if (asignacionExistente) {
-          estaEnElCurso = true;
-        } else {
-          estaEnElCurso = false;
-        }
-    }
-
-    return estaEnElCurso
-    
-  };
-
- 
 
   // Llamadas a los actions
   const curso = await getCursoPorId(id);
@@ -73,7 +33,6 @@ export default async function CursosProfesorPage({
   return (
     <section className="w-[90%] h-full overflow-auto ">
       <InfoCursoProfesor
-        estudiantePerteneciente={estudiantePerteneciente}
         id={id}
         curso={curso as unknown as Curso[]}
         profesor={usuario}
