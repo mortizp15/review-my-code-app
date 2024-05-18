@@ -22,13 +22,13 @@ export default function TablaEstudiantes({ desasignarEstudiante, estudiantes, va
     const handleAsignar = async (idEstudiante: string) => {
         const asignado = await asignarEstudiante(idEstudiante)
         if(asignado) {
-            setEstadosAsignacion((prev) => ({ ...prev, [idEstudiante]: false }));
-          }
+            setEstadosAsignacion((prev) => ({ ...prev, [idEstudiante]: true }));
+        }
     }
 
     const handleDesasignar = async (idEstudiante: string) => {
         await desasignarEstudiante(idEstudiante)
-        setEstadosAsignacion((prev) => ({ ...prev, [idEstudiante]: true }))
+        setEstadosAsignacion((prev) => ({ ...prev, [idEstudiante]: false }))
     }
 
     return (
@@ -64,7 +64,7 @@ export default function TablaEstudiantes({ desasignarEstudiante, estudiantes, va
             <td className="px-6 py-4 text-center">{estudiante.username}</td>
             <td className="px-6 py-4 flex items-center justify-center">
             {
-              !estadosAsignacion[estudiante.id] ? (
+              estadosAsignacion[estudiante.id] ? (
                 <button onClick={() => handleDesasignar(estudiante.id)} className="bg-red-400 w-fit px-3 text-white font-medium py-1 rounded-full">
                   Desasignar
                 </button>
