@@ -25,9 +25,9 @@ export default async function AsignarEstudiante({ searchParams } : { searchParam
 
         // Si ya existe la asignación, evitar insertar duplicado
         if (asignacionExistente) {
-            return false
-        } else {
             return true
+        } else {
+            return false
         }
     }
 
@@ -61,7 +61,7 @@ export default async function AsignarEstudiante({ searchParams } : { searchParam
         console.log("ID CURSO: ", id)
 
         // Si no existe la asignación, insertar
-        if(validarRelacion) {
+        if(!validarRelacion) {
            const { error } = await supabase
             .from("estudiante_curso")
             .insert([{ id_estudiante: idEstudiante, id_curso: id }])

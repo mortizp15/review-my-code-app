@@ -11,27 +11,24 @@ export default function TablaEstudiantes({ desasignarEstudiante, estudiantes, va
       useEffect(() => {
         const cargarEstadosAsignacion = async () => {
             const estados: { [key: string]: boolean } = {}
-            for (const estudiante of estudiantes) {
-              const asignado = await validarAsignacion(estudiante.id);
-              estados[estudiante.id] = asignado;
-            }
+            await Promise.all(estudiantes.map(async (estudiante) => {
+              estados[estudiante.id] = await validarAsignacion(estudiante.id);
+            }));
             setEstadosAsignacion(estados);
         };
         cargarEstadosAsignacion();
     }, [estudiantes])
 
-    const handleAsignar = (idEstudiante: string) => {
-        const asignado = asignarEstudiante(idEstudiante);
-        asignado.then((res) => {
-          if(res) {
-            setEstadosAsignacion((prev) => ({ ...prev, [idEstudiante]: true }));
+    const handleAsignar = async (idEstudiante: string) => {
+        const asignado = await asignarEstudiante(idEstudiante)
+        if(asignado) {
+            setEstadosAsignacion((prev) => ({ ...prev, [idEstudiante]: false }));
           }
-        })
     }
 
-    const handleDesasignar = (idEstudiante: string) => {
-        desasignarEstudiante(idEstudiante)
-        setEstadosAsignacion((prev) => ({ ...prev, [idEstudiante]: false }))
+    const handleDesasignar = async (idEstudiante: string) => {
+        await desasignarEstudiante(idEstudiante)
+        setEstadosAsignacion((prev) => ({ ...prev, [idEstudiante]: true }))
     }
 
     return (
