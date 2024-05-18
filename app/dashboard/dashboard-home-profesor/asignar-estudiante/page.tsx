@@ -60,6 +60,7 @@ export default async function AsignarEstudiante({ searchParams } : { searchParam
         console.log("ID ESTUDIANTE: ", idEstudiante)
         console.log("ID CURSO: ", id)
 
+        // Si no existe la asignación, insertar
         if(validarRelacion) {
            const { error } = await supabase
             .from("estudiante_curso")
@@ -69,12 +70,14 @@ export default async function AsignarEstudiante({ searchParams } : { searchParam
             if (error) {
                 console.error('Error al insertar:', error)
                 return false
+            } else {
+                return true
             }
 
+        } else {
             return true
-        } 
+        }
        
-        return false
 
     }
 
