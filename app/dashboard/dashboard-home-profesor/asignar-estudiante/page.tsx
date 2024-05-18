@@ -1,4 +1,4 @@
-import { getEstudiantes, validarAsignacion } from "@/app/lib/actions";
+import { getEstudiantes } from "@/app/lib/actions";
 import { EstudianteSearch } from "@/app/lib/types";
 import TablaEstudiantes from "@/app/ui/profesor/tabla-estudiantes";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
@@ -8,6 +8,28 @@ export default async function AsignarEstudiante({ searchParams } : { searchParam
 
     const id = searchParams.idCurso;
     const estudiantes = await getEstudiantes();
+
+    // Validar estudiante relacionado
+    const validarAsignacion = async (idEstudiante: string) : Promise<boolean> => {
+
+        "use server"
+
+        const supabase = createServerActionClient({ cookies })
+
+         // Validar si ya esta apuntado al curso
+         const { data: asignacionExistente } = await supabase
+         .from("estudiante_curso")
+         .select()
+         .match({ id_estudiante: idEstudiante, id_curso: id })
+         .single();
+
+        // Si ya existe la asignación, evitar insertar duplicado
+        if (asignacionExistente) {
+            return true
+        } else {
+            return false
+        }
+    }
 
     // Desasignar estudiante de un curso
     const desasignarEstudiante = async (idEstudiante: string) => {
@@ -33,7 +55,7 @@ export default async function AsignarEstudiante({ searchParams } : { searchParam
         "use server"
 
         const supabase = createServerActionClient({ cookies })
-        const validarRelacion = await validarAsignacion(idEstudiante, id)
+        const validarRelacion = await validarAsignacion(idEstudiante)
                  
         console.log("ID ESTUDIANTE: ", idEstudiante)
         console.log("ID CURSO: ", id)
@@ -64,7 +86,7 @@ export default async function AsignarEstudiante({ searchParams } : { searchParam
             <h1 className="text-white mb-10 font-semibold text-[30px]">Asignar Estudiante</h1>
             
             <div className="relative w-[50%] overflow-x-auto max-h-96 overflow-y-auto shadow-md sm:rounded-lg">
-                <TablaEstudiantes idCurso={id} desasignarEstudiante={desasignarEstudiante} estudiantes={estudiantes as unknown as EstudianteSearch[]} asignarEstudiante={asignarEstudiante}/>
+                <TablaEstudiantes desasignarEstudiante={desasignarEstudiante} estudiantes={estudiantes as unknown as EstudianteSearch[]} validarAsignacion={validarAsignacion} asignarEstudiante={asignarEstudiante}/>
             </div>
         </section>
     )

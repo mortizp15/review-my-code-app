@@ -223,23 +223,3 @@ export async function getEnvioTareaById(idEnvio: string) {
 
   return envio;
 }
-
- // Validar estudiante relacionado
- export const validarAsignacion = async (idCurso: string, idEstudiante: string) : Promise<boolean> => {
-
-  const supabase = createServerComponentClient({ cookies })
-
-   // Validar si ya esta apuntado al curso
-   const { data: asignacionExistente } = await supabase
-   .from("estudiante_curso")
-   .select()
-   .match({ id_estudiante: idEstudiante, id_curso: idCurso })
-   .single();
-
-  // Si ya existe la asignación, evitar insertar duplicado
-  if (asignacionExistente) {
-      return true
-  } else {
-      return false
-  }
-}
