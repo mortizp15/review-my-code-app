@@ -49,11 +49,7 @@ export default async function CursosProfesorPage({
     }
   };
 
-  const pertenece = await estudiantePerteneciente();
-  if(!pertenece) {
-    alert("No perteneces a este curso");
-    redirect("/dashboard/dashboard-home-estudiante")
-  }
+ 
 
   // Llamadas a los actions
   const curso = await getCursoPorId(id);
@@ -71,6 +67,7 @@ export default async function CursosProfesorPage({
   return (
     <section className="w-[90%] h-full overflow-auto ">
       <InfoCursoProfesor
+        estudiantePerteneciente={estudiantePerteneciente}
         id={id}
         curso={curso as unknown as Curso[]}
         profesor={usuario}
