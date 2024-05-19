@@ -125,9 +125,8 @@ export async function getEstudiantes() {
 }
 
 // Obtiene la tarea enviada por un estudiante
-export async function getTareasEnviadas(idTarea: string) {
+export async function getTareasEnviadas(idEstudiante: string, idTarea: string) {
   const supabase = createServerComponentClient({ cookies });
-  const idEstudiante = await getUsuarioId();
   let { data: tareasEnviadas } = await supabase
     .from("envio_de_tarea")
     .select("*")

@@ -32,7 +32,6 @@ export default async function DashboardHomeEstudiante() {
  
 
 
-  // La lista que se recorre en el componente SideNavDashBoard es de cursos, se castea a Curso[] para "borrar" el tipo original
   return (
     <section className="flex flex-col w-[90%]">    
         <BienvenidaHome session={session}/>

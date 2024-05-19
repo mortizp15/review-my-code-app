@@ -8,9 +8,13 @@ export default async function PageTareasProfesor({
     searchParams: { id: string}
 }) {
 
+    let idEstudiante = ""
     const idTarea = searchParams.id;
     const estudiantesDeTarea = await getEstudiantesPorTarea(idTarea)
-    const tareasEnviadas = await getTareasEnviadas(idTarea);
+    estudiantesDeTarea?.map((estudiante) => {
+        idEstudiante = estudiante.id
+    })
+    const tareasEnviadas = await getTareasEnviadas(idEstudiante, idTarea);
    
 
   return (

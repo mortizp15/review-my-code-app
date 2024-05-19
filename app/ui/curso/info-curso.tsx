@@ -8,12 +8,6 @@ import Link from "next/link";
 
 export default function InfoCurso({ id, tareas_pendientes, curso, profesor, tareas }: { id: string, tareas_pendientes: TypeTareasPendientes[], curso: Curso[], profesor: string, tareas: Tarea[] }) {
 
-    let idCursoDeTareaPendiente = ""
-    tareas_pendientes.map((tarea) => {
-        idCursoDeTareaPendiente = tarea.id_curso || ""
-    
-    })
-
   return (
     <div className="text-[#ececec] py-14 w-[40%] h-full flex flex-col mx-auto">
       {curso.map((curso) => (
