@@ -18,6 +18,7 @@ export default async function TareasEstudiante({
 
     const idEstudiante = await getUsuarioId()
     const tarea = await getTareaById(id)
+    const tareaEnviada = await getTareasEnviadas(idEstudiante?.toString(), id)
 
     const addTarea = async (formData: FormData) => {
         "use server";
@@ -63,7 +64,7 @@ export default async function TareasEstudiante({
                 ))
                 
             }
-            <EnviarTarea session={session as unknown as Session} addTarea={addTarea} tarea={tarea as unknown as Tarea[]} idTarea={id} idEstudiante={idEstudiante as unknown as string}/>
+            <EnviarTarea tareaEnviada={tareaEnviada as unknown as EnvioDeTarea[]} session={session as unknown as Session} addTarea={addTarea} tarea={tarea as unknown as Tarea[]} idTarea={id} idEstudiante={idEstudiante as unknown as string}/>
        </section>
     )
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { Tarea } from "@/app/lib/definitions";
+import { EnvioDeTarea, Tarea } from "@/app/lib/definitions";
 import { getRepos } from "@/app/lib/services";
 import { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
@@ -8,12 +8,14 @@ import { useEffect, useState } from "react";
 
 
 export default function EnviarTarea({
+  tareaEnviada,
   session,
   tarea,
   addTarea,
   idTarea,
   idEstudiante,
 }: {
+  tareaEnviada: EnvioDeTarea[]
   session: Session;
   tarea: Tarea[];
   addTarea: (formData: FormData) => void;  
@@ -69,7 +71,7 @@ export default function EnviarTarea({
     
   return (
     <div className="w-[70%] mx-auto h-[30%] mt-20">
-    { !enviado && fechaLimite === "" ? (
+    { !enviado && fechaLimite === "" && tareaEnviada.length !== 0 ? (
         <>
             <h1 className="text-white text-center mb-5 font-semibold text-[25px]">
             ¡Envia tu tarea!
@@ -99,7 +101,7 @@ export default function EnviarTarea({
         <h1 className="text-red-600 text-center mb-5 font-semibold text-[25px]">
             {fechaLimite}
         </h1>
-    ) : (
+    ) : enviado && (
         <h1 className="text-white text-center mb-5 font-semibold text-[25px]">
           ¡Tarea Enviada!
         </h1>
