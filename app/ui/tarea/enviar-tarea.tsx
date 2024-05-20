@@ -1,6 +1,6 @@
 "use client"
 
-import { EnvioDeTarea, Tarea } from "@/app/lib/definitions";
+import { Tarea } from "@/app/lib/definitions";
 import { getRepos } from "@/app/lib/services";
 import { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";

@@ -41,7 +41,7 @@ export default function EditorRepos({
         setFileTree(contenido.tree);
       })
       .catch((error) => {
-        console.error("Error al obtener el contenido del repositorio", error);
+        console.error("Error al obtener el contenido del repo", error);
       });
   }, [owner, nombreRepo]);
 
@@ -80,14 +80,14 @@ export default function EditorRepos({
 
   return (
     <div className="flex w-full h-screen">
-      <div className="w-[20%] overflow-y-auto bg-[#131313] text-white p-4">
+      <div className="w-[20%] overflow-y-auto overflow-x-hidden bg-[#131313] text-white p-4">
         <Link
           href="/dashboard/dashboard-home-profesor"
           className="font-bold text-[19px] w-fit border-2 mt-3 border-2-white p-2 rounded-full flex items-center text-white mx-auto mb-14"
         >
           {ICON}
         </Link>
-        <ul>
+        <ul className="w-full overflow-x-auto">
           {fileTree?.map((file) => (
             <li
               key={file.path}

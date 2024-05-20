@@ -2,7 +2,6 @@ import { getIdTareaEnviada, getRepoInfo, getUsuarioId } from "@/app/lib/actions"
 import EditorRepos from "@/app/ui/editor/editor-repos";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 
 export default async function PageEditor({ searchParams } : { searchParams: { idTarea: string, idEstudiante: string } }) {
