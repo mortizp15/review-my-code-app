@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import cors from "nextjs-cors";
+
 
 export async function GET(req: NextRequest, context: any) {
 
