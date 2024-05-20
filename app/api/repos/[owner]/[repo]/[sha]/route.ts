@@ -1,7 +1,6 @@
-import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
-export async function GET(req: NextApiRequest, context: any) {
+export async function GET(req: NextRequest, context: any) {
   const { owner, repo, sha } = context.params;
   if (
     typeof owner !== "string" ||
