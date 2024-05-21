@@ -7,7 +7,7 @@ export default function PageProfesor({ children } : {
     return (
     <html lang="es">
         <title>Dashboard Profesor</title>
-        <section className="absolute w-full h-full flex bg-[#111111]">
+        <section className="absolute w-full h-full flex bg-[#0a0a0a]">
             <SidenavDashboardProfesor />
             {children}
             <Analytics />

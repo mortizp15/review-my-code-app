@@ -17,7 +17,7 @@ export default function SidenavDashboardProfesor() {
     }
 
     return (
-    <div className="bg-[#19181D] flex flex-col justify-between items-center left-0 w-[20rem] border-r-2 border-r-[#333] h-full p-10 ">
+    <div className="bg-[#0a0a0a] flex flex-col justify-between items-center left-0 w-[20rem] border-r-2 border-r-[#333] h-full p-10 ">
       <div className="flex flex-col mt-5 h-[80%] overflow-auto">
         <Link
           href="/"

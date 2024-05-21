@@ -38,7 +38,7 @@ export default async function DashboardEstudianteLayout({
   return (
     <html lang="es">
       <title>Dashboard Estudiante</title>
-      <section className="absolute w-full h-full flex bg-[#111111]">
+      <section className="absolute w-full h-full flex bg-[#0a0a0a]">
         <SideNavDashBoard
           cursos={
             (estudiante_curso?.map(
