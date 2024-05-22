@@ -4,8 +4,7 @@ import { Curso, Tarea } from "@/app/lib/definitions";
 import Link from "next/link";
 import TareasDelCurso from "../curso/tarea";
 import { GoPlus } from "react-icons/go";
-import React, { useEffect } from "react";
-import { redirect } from "next/navigation";
+import React from "react";
 
 export default function InfoCursoProfesor({ id, curso, profesor, tareas } : { id: string, curso: Curso[], profesor: string, tareas: Tarea[] }) { 
 

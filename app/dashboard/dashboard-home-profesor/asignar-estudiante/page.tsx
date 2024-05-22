@@ -56,9 +56,6 @@ export default async function AsignarEstudiante({ searchParams } : { searchParam
 
         const supabase = createServerActionClient({ cookies })
         const validarRelacion = await validarAsignacion(idEstudiante)
-                 
-        console.log("ID ESTUDIANTE: ", idEstudiante)
-        console.log("ID CURSO: ", id)
 
         // Si no existe la asignación, insertar
         if(!validarRelacion) {
@@ -77,8 +74,6 @@ export default async function AsignarEstudiante({ searchParams } : { searchParam
         } else {
             return true
         }
-       
-
     }
 
     return (

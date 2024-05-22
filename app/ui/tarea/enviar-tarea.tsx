@@ -8,14 +8,12 @@ import { useEffect, useState } from "react";
 
 
 export default function EnviarTarea({
-  tareaEnviada,
   session,
   tarea,
   addTarea,
   idTarea,
   idEstudiante,
 }: {
-  tareaEnviada: EnvioDeTarea[]
   session: Session;
   tarea: Tarea[];
   addTarea: (formData: FormData) => void;  
@@ -71,7 +69,7 @@ export default function EnviarTarea({
     
   return (
     <div className="w-[70%] mx-auto h-[30%] mt-20">
-    { !enviado && fechaLimite === "" && tareaEnviada.length !== 0 ? (
+    { !enviado && fechaLimite === "" ? (
         <>
             <h1 className="text-white text-center mb-5 font-semibold text-[25px]">
             ¡Envia tu tarea!
