@@ -4,12 +4,10 @@ import {
   getTareasEnviadas,
   getTareasPendientes,
   getUsuarioById,
+  getUsuarioId,
 } from "@/app/lib/actions";
 import { Curso, Tarea } from "@/app/lib/definitions";
 import InfoCurso from "@/app/ui/curso/info-curso";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 export type TypeTareasPendientes  = {
   descripcion_tarea: string | null;
@@ -31,12 +29,13 @@ export default async function CursoPage({
   const { id } = searchParams;
 
   // Llamadas a los actions
+  const idEstudiante = await getUsuarioId();
   const curso = await getCursoPorId(id);
   const profesor = await getUsuarioById(
     curso?.map((curso) => curso.id_profesor_creador) as unknown as string
   );
   const tareasDelCurso = await getTareaByCurso(id);
-  const tareas_pendientes = await getTareasPendientes();
+  const tareas_pendientes = idEstudiante ? await getTareasPendientes(idEstudiante.toString()) : [];
   
 
 
