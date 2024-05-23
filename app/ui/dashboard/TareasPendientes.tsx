@@ -1,4 +1,5 @@
 import { TypeTareasPendientes } from "@/app/dashboard/dashboard-home-estudiante/curso/page";
+import { Curso } from "@/app/lib/definitions";
 import { format } from "date-fns";
 import Link from "next/link";
 import { IoAlertCircleOutline } from "react-icons/io5";

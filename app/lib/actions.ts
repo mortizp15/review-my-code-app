@@ -49,14 +49,9 @@ export async function getCursosDeEstudiante() {
 // Obtiene las tareas pendientes de un estudiante
 export async function getTareasPendientes(userId: string | null) {
   const supabase = createServerComponentClient({ cookies });
-  
-  // Define el SQL para llamar a la función con un parámetro
-  const query = `
-    SELECT * FROM vista_tareas_pendientes(${userId});
-  `;
 
   let { data: tareasPendientes, error } = await supabase
-    .rpc('raw', { query });
+    .rpc('vista_tareas_pendientes', { id_usuario: userId });
 
   if (error) {
     console.error('Error al obtener las tareas pendientes:', error);
