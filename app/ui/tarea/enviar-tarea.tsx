@@ -28,14 +28,16 @@ export default function EnviarTarea({
 
     // Obtener repositorios del usuario
     useEffect(() => {
-      getRepos(session.user?.user_metadata.user_name)
+      if(!enviado) {
+        getRepos(session.user?.user_metadata.user_name)
         .then((data) => {
           setRepos(data);
         })
         .catch((error) => {
           console.error("Error al obtener los repositorios", error);
         });
-
+      }
+    
     }, [session.user?.user_metadata.user_name])
   
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
