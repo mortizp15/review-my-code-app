@@ -1,9 +1,13 @@
 "use client";
 
 import { getContenidoArchivo, getContenidoRepo } from "@/app/lib/services";
+import { Repo } from "@/app/lib/types";
 import Editor from "@monaco-editor/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import EnviarCorreccion from "./enviar-correccion";
+import { FileTreeItem } from "./file-tree-item";
+import { set } from "date-fns";
 
 export default function EditorRepos({
   enviarComentario,
@@ -14,10 +18,9 @@ export default function EditorRepos({
   owner: string;
   nombreRepo: string;
 }) {
-
-  const ICON = "</>"
-  const [enviado, setEnviado] = useState(false);
-  const [fileTree, setFileTree] = useState<{ path: string }[]>([]);
+  const ICON = "</>";
+  const [fileTree, setFileTree] = useState<Repo[]>([]);
+  const [extension, setExtension] = useState<string>("");
   const [code, setCode] = useState(`
     //                               ##                                                                                ###
     //                                                                                                                  ##
@@ -33,25 +36,50 @@ export default function EditorRepos({
     //                                              ESTE EDITOR ESTÁ EN MODO DE SOLO LECTURA                                                  
   `);
 
+  // Crear estructura jeraquizada de los archivos de un repositorio
+  function createTreeStructure(entries: Repo[]) {
+    let root = {
+      path: "/",
+      type: "tree",
+      children: [] as any[],
+    };
+
+    entries.forEach((entry) => {
+      const parts = entry.path.split("/");
+      let current = root;
+      for (let i = 0; i < parts.length; i++) {
+        const part = parts[i];
+        const isLast = i === parts.length - 1;
+        let child = current.children.find((c) => c.path === part);
+
+        if (!child) {
+          child = {
+            path: part,
+            type: isLast ? entry.type : "tree",
+            children: [],
+            ...(isLast ? { sha: entry.sha } : {}),
+          };
+
+          current.children.push(child);
+        }
+        current = child;
+      }
+    });
+
+    if(root.children.length > 0) return root.children;
+  }
 
   // Llamar a la API de GitHub para obtener el contenido del repositorio
   useEffect(() => {
     getContenidoRepo(owner, nombreRepo)
       .then((contenido) => {
-        setFileTree(contenido.tree);
+        const tree = createTreeStructure(contenido.tree) as Repo[];
+        setFileTree(tree);
       })
       .catch((error) => {
         console.error("Error al obtener el contenido del repo", error);
       });
   }, [owner, nombreRepo]);
-
-  const handleSubmit = (formData: FormData) => {
-    enviarComentario(formData);
-    setEnviado(true);
-    setTimeout(() => {
-      setEnviado(false);
-    }, 4000);
-  };
 
   function b64DecodeUnicode(str: string) {
     // Decodificar primero a bytes escapados y luego decodificar el escape con decodeURIComponent
@@ -66,6 +94,20 @@ export default function EditorRepos({
 
   // Manejar la selección de un archivo
   const handleFileSelect = (file: any) => {
+    const extension = file.path.split(".").pop();
+    switch (extension) {
+      case "js":
+        setExtension("javascript");
+        break;
+      case "ts":
+        setExtension("typescript");
+        break;
+      case "py":
+        setExtension("python");
+        break;
+      default: setExtension(extension ?? "");
+    }
+    // Obtener el contenido del archivo seleccionado
     getContenidoArchivo(owner, nombreRepo, file.sha)
       .then((contenido) => {
         // Decodificar el contenido del archivo
@@ -87,24 +129,24 @@ export default function EditorRepos({
         >
           {ICON}
         </Link>
-        <ul className="w-full overflow-x-auto">
-          {fileTree?.map((file) => (
-            <li
-              key={file.path}
-              className="cursor-pointer rounded-md transition-all hover:bg-blue-600 p-2"
-              onClick={() => handleFileSelect(file)}
-            >
-              {file.path}
-            </li>
-          ))}
-        </ul>
+        {
+          fileTree.map((item) => (
+              (item.children ?? []).length > 0 && (
+                <FileTreeItem
+                key={item.sha}
+                item={item}
+                handleFileSelect={handleFileSelect}
+                />
+              )
+          ))
+        }
       </div>
       <div className="w-full">
         <Editor
           height="100%"
           width="80%"
           theme="vs-dark"
-          language="html"
+          language={extension}
           value={code}
           options={{
             readOnly: true,
@@ -115,59 +157,10 @@ export default function EditorRepos({
         />
       </div>
       <div className="fixed right-0 max-w-[16.6%] w-[16.6%] top-0 flex flex-col items-center bg-[#131313] h-full">
-        <form className="flex flex-col w-[70%]" action={handleSubmit}>
-          <label
-            className="text-white font-semibold text-[15px] text-center mt-10 mb-5"
-            htmlFor="archivo"
-          >
-            Selecciona un archivo
-          </label>
-          <select
-            name="archivo"
-            className="bg-transparent border-[2px] border-[#494949] p-2 text-white rounded-md"
-          >
-            {fileTree.map((file) => (
-              <option className="text-black" key={file.path} value={file.path}>
-                {file.path}
-              </option>
-            ))}
-          </select>
-          <label
-            className="text-white font-semibold text-[15px] text-center mt-10 mb-5"
-            htmlFor="comentario"
-          >
-            Línea a comentar
-          </label>
-          <input
-            type="number"
-            className="bg-transparent border-[2px] border-[#494949] p-2 text-white rounded-md"
-            name="linea"
-            placeholder="Línea"
-          />
-          <label
-            className="text-white font-semibold text-[15px] text-center mt-10 mb-5"
-            htmlFor="comentario"
-          >
-            Comentario
-          </label>
-          <textarea
-            className="bg-transparent border-[2px] border-[#494949] h-36 p-2 text-white rounded-md"
-            name="comentario"
-            placeholder="¿Qué quieres decirle a tu alumno?"
-          ></textarea>
-          {enviado ? (
-            <button className="py-2 w-full text-white font-semibold rounded-full bg-blue-500 mt-10">
-              ¡Enviado!
-            </button>
-          ) : (
-            <button
-              type="submit"
-              className="py-2 w-full text-white font-semibold rounded-full bg-green-500 mt-10"
-            >
-              Enviar
-            </button>
-          )}
-        </form>
+        <EnviarCorreccion
+          enviarComentario={enviarComentario}
+          fileTree={fileTree as unknown as Repo[]}
+        />
       </div>
     </div>
   );

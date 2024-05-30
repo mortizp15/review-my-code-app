@@ -13,6 +13,12 @@ export type EstudianteSearch = {
   username: string
 }
 
+export type Repo = {
+  path: string,
+  type: string,
+  sha: string,
+  children?: Repo[]
+}
 
 export type Database = {
   public: {

@@ -1,5 +1,6 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { Repo } from "./types";
 
 // Obtiene el ID del estudiante que esya logueado
 export async function getUsuarioId() {
@@ -228,3 +229,4 @@ export async function getEnvioTareaById(idEnvio: string) {
 
   return envio;
 }
+

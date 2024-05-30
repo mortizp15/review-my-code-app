@@ -58,7 +58,7 @@ export default function EnviarTarea({
           } else {
             addTarea(formData);
           }
-        })   
+        })
   
         setEnviado(true);
     };

@@ -1,7 +1,6 @@
 import {
   getCursoPorId,
   getTareaByCurso,
-  getTareasEnviadas,
   getTareasPendientes,
   getUsuarioById,
   getUsuarioId,
