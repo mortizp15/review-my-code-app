@@ -1,4 +1,4 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Session, createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import UpdateRol from "../ui/dashboard/update-rol";
@@ -36,7 +36,7 @@ export default async function Dashboard() {
 
   return (
     <>
-        <Header />
+        <Header session={session as unknown as Session}/>
         <UpdateRol session={session} />
     </>
   )
