@@ -23,7 +23,7 @@ export default function UserInfo({ handleSignOut, session }: UserInfoProps) {
           src={session?.user?.user_metadata?.avatar_url || ""}
           data-dropdown-toggle="dropdownDivider"
           alt="Avatar usuario"
-          className="w-10 h-10 rounded-full cursor-pointer"
+          className="w-[4.2rem] h-10 rounded-full cursor-pointer"
           id="dropdownDividerButton"
           onClick={toggleDropdown}
         />

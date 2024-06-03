@@ -12,7 +12,7 @@ export default function Contacto() {
     const ICON = "</>";
 
   return (
-    <section className="w-full flex p-4 h-full">
+    <section className="w-full flex items-center justify-center p-4 h-full">
       <div className="w-[30%] h-full p-3 px-10 flex flex-col justify-between">
         <div>
             <Link href="/" className="mr-5 font-bold text-[20px] text-white">
@@ -56,8 +56,16 @@ export default function Contacto() {
             <a href="mailto:maortizpelegrin@gmail.com" target="_blank" className="font-bold text-[20px] text-white"><SiGmail /></a>
         </div>
       </div>
-      <div className="w-[70%] rounded-[20px] h-full p-14 bg-[#463dc2] ">
-        <h1 className="text-[40px] w-[70%] text-white font-semibold">¡Contáctanos! Estamos encantados de leerte. Cualquier idea o sugerencia</h1>
+      <div className="w-[50%] rounded-[20px] h-full p-14 text-white bg-[#463dc2] ">
+        <h1 className="text-[40px] font-semibold">¡Contáctanos! Estamos encantados de leerte. Cualquier idea o sugerencia, ¡dinosla!</h1>
+        <p className="mt-3 font-medium">Todos los campos con el simbolo "*" son obligatorios de rellenar.</p>
+      
+        <form action="" className="flex flex-col mt-20">
+            <input type="text" placeholder="Tu nombre" className="text-white bg-transparent border-b-2 placeholder:text-white py-3 border-white focus:outline-none"/>
+            <input type="text" placeholder="Correo electrónico" className="text-white bg-transparent mt-5 border-b-2 placeholder:text-white py-3  border-white focus:outline-none"/>
+            <textarea placeholder="¡Cuéntanos!" className="text-white bg-transparent border-b-2 mt-7 h-[150px] placeholder:text-white py-3  border-white focus:outline-none"/>
+            <button className="mt-7  bg-white text-black font-semibold py-3 px-5 rounded-md">Enviar</button>
+        </form>
       </div>
     </section>
   );
