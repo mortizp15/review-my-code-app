@@ -26,7 +26,7 @@ export default function BotonAuth({ session } : { session: Session | null }) {
         <div className="text-white">
             {
                 session === null ? (
-                    <button onClick={handleSignIn} className="iniciarSesion mr-4 font-medium px-4 py-2 rounded-full transition bg-[linear-gradient(#6C3BF5,#3F8CFF)]">
+                    <button onClick={handleSignIn} className="iniciarSesion mr-4 font-medium w-36 py-2 rounded-full transition bg-[linear-gradient(#6C3BF5,#3F8CFF)]">
                         Iniciar Sesión
                     </button>
                 ) : (

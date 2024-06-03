@@ -14,7 +14,7 @@ export default function NavLinks() {
                 <Link
                     key={link.nombre}
                     href={link.href}
-                    className="mx-5 cursor-pointer font-medium transition hover:text-[#77adff]"
+                    className="mx-5 my-3 cursor-pointer font-medium transition hover:text-[#77adff]"
                 >
                     {link.nombre}
                 </Link>

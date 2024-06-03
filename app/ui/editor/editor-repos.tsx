@@ -36,7 +36,7 @@ export default function EditorRepos({
     //                                              ESTE EDITOR ESTÁ EN MODO DE SOLO LECTURA                                                  
   `);
 
-  // Crear estructura jeraquizada de los archivos de un repositorio
+  // Crear estructura jerarquizada de los archivos de un repositorio
   function createTreeStructure(entries: Repo[]) {
     let root = {
       path: "/",

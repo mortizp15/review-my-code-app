@@ -3,13 +3,18 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 import Header from "./ui/header";
 import 'animate.css';
 import QueOfrecemos from "./ui/home/que-ofrecemos";
+import { cookies } from "next/headers";
+import { Session, createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 
 export default async function Home() {
   
+  const supabase = createServerComponentClient({ cookies })
+  const { data: { session } } = await supabase.auth.getSession()
+
   return (    
     <>
-      <Header />
+      <Header session={session as unknown as Session}/>
       <section className="mt-32 w-full flex flex-col items-center">
         <h1
           style={{ border: "1px solid gray" }}
