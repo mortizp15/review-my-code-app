@@ -58,7 +58,7 @@ export default function Contacto() {
       </div>
       <div className="w-[50%] rounded-[20px] h-full p-14 text-white bg-[#463dc2] ">
         <h1 className="text-[40px] font-semibold">¡Contáctanos! Estamos encantados de leerte. Cualquier idea o sugerencia, ¡dinosla!</h1>
-        <p className="mt-3 font-medium">Todos los campos con el simbolo "*" son obligatorios de rellenar.</p>
+        <p className="mt-3 font-medium">Todos los campos con el simbolo &quot;*&quot; son obligatorios de rellenar.</p>
       
         <form action="" className="flex flex-col mt-20">
             <input type="text" placeholder="Tu nombre" className="text-white bg-transparent border-b-2 placeholder:text-white py-3 border-white focus:outline-none"/>
