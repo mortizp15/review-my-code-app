@@ -4,9 +4,11 @@ import { useState } from "react";
 export default function EnviarCorreccion({
   enviarComentario,
   fileTree,
+  nombreRepo,
 }: {
   enviarComentario: (formData: FormData) => void;
   fileTree: Repo[];
+  nombreRepo: string;
 }) {
   const [enviado, setEnviado] = useState(false);
 
@@ -78,6 +80,7 @@ export default function EnviarCorreccion({
         name="comentario"
         placeholder="¿Qué quieres decirle a tu alumno?"
       ></textarea>
+      <input type="hidden" name="nombre_repo" value={nombreRepo} />
       {enviado ? (
         <button className="py-2 w-full text-white font-semibold rounded-full bg-blue-500 mt-10">
           ¡Enviado!

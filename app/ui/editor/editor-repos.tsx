@@ -160,6 +160,7 @@ export default function EditorRepos({
         <EnviarCorreccion
           enviarComentario={enviarComentario}
           fileTree={fileTree as unknown as Repo[]}
+          nombreRepo={nombreRepo}
         />
       </div>
     </div>

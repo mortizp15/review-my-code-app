@@ -36,7 +36,8 @@ export default async function PageEditor({ searchParams } : { searchParams: { id
                     id_usuario_profesor: idProfesor,
                     texto_comentario: formData.get("comentario") as string,
                     linea_codigo_comentada: formData.get("linea") as string,
-                    archivo: formData.get("archivo") as string
+                    archivo: formData.get("archivo") as string,
+                    nombre_repo: formData.get("nombre_repo") as string,
                 }
         ]);
 

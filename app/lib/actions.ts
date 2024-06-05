@@ -213,7 +213,7 @@ export async function getComentariosDeEnvio() {
   const idEstudiante = await getUsuarioId()
   let { data: comentarios } = await supabase
     .from("comentario_de_code_review")
-    .select("id_envio_tarea, texto_comentario, linea_codigo_comentada, archivo")
+    .select("id_envio_tarea, texto_comentario, linea_codigo_comentada, archivo, nombre_repo")
     .eq("id_usuario_estudiante", idEstudiante);
 
   return comentarios;
