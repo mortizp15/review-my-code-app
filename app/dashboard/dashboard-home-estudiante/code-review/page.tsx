@@ -24,10 +24,10 @@ export default async function CorreccionesPage() {
                                                 }} />
                                             </div>
                                             <div className="ml-5">
-                                                <h1 className="font-semibold text-[15px]">Descripción: {comentario.texto_comentario}</h1>
+                                                <h1 className="font-semibold text-[15px]">Descripción: { comentario.texto_comentario }</h1>
                                                 <p className="text-[#507ddf]">Línea: { comentario.linea_codigo_comentada }</p>
                                                 <p className="text-[#d8e5ff] font-semibold">Archivo: { comentario.archivo }</p>
-                                                <p className="text-[#d8e5ff] font-semibold">Repositorio: { comentario.nombre_repo }</p>
+                                                <p className="text-[#feffffb9] font-semibold">Repositorio: </p><span className="text-[#d8e5ff]">{ comentario.nombre_repo }</span>
                                             </div>
                                         </div>
                                     
