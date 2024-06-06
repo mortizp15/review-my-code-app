@@ -31,7 +31,7 @@ export default async function Home() {
           className="mt-14 text-[#a0a0a0] w-1/3 text-xl text-center animate__animated animate__fadeIn"
         >
           Ayuda a tus alumnos a construir código más limpio, seguro y de
-          calidad. Aseguraté de que cumplan los plazos necesarios con nuestro
+          calidad. Asegúrate de que cumplan los plazos necesarios con nuestro
           sistema de tareas.
         </h3>
         <Link
